@@ -40,6 +40,11 @@ const routes: Routes = [
       import('../modules/new/new.module').then((m) => m.NewModule),
   },
   {
+    path: 'edit/:id',
+    loadChildren: () =>
+      import('../modules/new/new.module').then((m) => m.NewModule),
+  },
+  {
     path: 'orders',
     loadChildren: () =>
       import('../modules/orders/orders.module').then((m) => m.OrdersModule),

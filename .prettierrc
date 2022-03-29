@@ -1,0 +1,33 @@
+{"editor.wordWrap": "off",
+ "[html]": {
+ "editor.defaultFormatter": "esbenp.prettier-vscode"
+ },
+ "editor.fontSize": 12,
+ "workbench.iconTheme": "material-icon-theme",
+ "editor.formatOnPaste": true,
+ "[javascript]": {
+ "editor.defaultFormatter": "esbenp.prettier-vscode",
+ "editor.formatOnSave": true,
+ "editor.formatOnPaste": true
+ },
+ "[typescript]": {
+ "editor.formatOnPaste": true,
+ "editor.formatOnSave": true,
+ "editor.defaultFormatter": "esbenp.prettier-vscode"
+ },
+ "prettier.requireConfig": true,
+ "prettier.trailingComma": "all",
+ "prettier.singleQuote": true,
+ "prettier.tabWidth": 80,
+ "workbench.startupEditor": "none",
+ "editor.defaultFormatter": "esbenp.prettier-vscode",
+ "files.trimTrailingWhitespace": true,
+ "typescript.updateImportsOnFileMove.enabled": "always",
+ "explorer.confirmDragAndDrop": false,
+ "update.mode": "none",
+ "explorer.confirmDelete": false,
+ "security.workspace.trust.untrustedFiles": "open",
+ "bracket-pair-colorizer-2.depreciation-notice": false,
+ "workbench.editor.enablePreview": false,
+ "javascript.updateImportsOnFileMove.enabled": "always"
+}

@@ -1,15 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Subject, map, Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { Comment } from '../models/comment.model';
-import { PostRealtimeDatabaseResponse } from '../models/postRealtimeDbResponse.model';
-import { ProductInfo } from '../models/productInfo.model';
-import { Products } from '../models/products.model';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { AngularFireStorage } from "@angular/fire/compat/storage";
+import { Subject, map, Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { Comment } from "../models/comment.model";
+import { PostRealtimeDatabaseResponse } from "../models/postRealtimeDbResponse.model";
+import { ProductInfo } from "../models/productInfo.model";
+import { Products } from "../models/products.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ProductService {
   //firebase storage library variables
@@ -25,7 +25,12 @@ export class ProductService {
   constructor(private http: HttpClient, private storage: AngularFireStorage) {}
 
   //this method for use upload image metadata and other information from product form!
-  upload(selectedImage: File, productInfo: ProductInfo): Observable<any> {
+  upload(
+    selectedImage: File,
+    productInfo: ProductInfo,
+    isEditMode: boolean,
+    productId: string
+  ): Observable<any> {
     this.filePath = `images/${selectedImage.name}_${new Date().getTime()}`; //create a path for firebase storage
     this.fileRef = this.storage.ref(this.filePath); //get the referance of file in storage
 
@@ -46,15 +51,28 @@ export class ProductService {
               category: productInfo.category,
               imagePath: imageUrl,
             };
-            //call the method which will post data to realtime database
-            this.postProductData(newProductInfo).subscribe(
-              () => {
-                this.isSaveComplete.next(true); //this is a subject next for give information to UI
-              },
-              (error) => {
-                this.isSaveComplete.next(false); //this is a subject next for give information to UI
-              }
-            );
+            //call the method which will post or update data to realtime database
+            if (!isEditMode) {
+              //post data to database
+              this.postProductData(newProductInfo).subscribe(
+                () => {
+                  this.isSaveComplete.next(true); //this is a subject next for give information to UI
+                },
+                (error) => {
+                  this.isSaveComplete.next(false); //this is a subject next for give information to UI
+                }
+              );
+            } else {
+              //update data on database
+              this.updateProductData(productId, newProductInfo).subscribe(
+                () => {
+                  this.isSaveComplete.next(true);
+                },
+                (error) => {
+                  this.isSaveComplete.next(false);
+                }
+              );
+            }
           });
         })
       );
@@ -64,7 +82,19 @@ export class ProductService {
     productInfo: ProductInfo
   ): Observable<PostRealtimeDatabaseResponse> {
     return this.http.post<PostRealtimeDatabaseResponse>(
-      'https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products.json',
+      "https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products.json",
+      productInfo
+    );
+  }
+  //realtime database update method
+  updateProductData(
+    productId: string,
+    productInfo: ProductInfo
+  ): Observable<PostRealtimeDatabaseResponse> {
+    return this.http.patch<PostRealtimeDatabaseResponse>(
+      "https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/" +
+        productId +
+        ".json",
       productInfo
     );
   }
@@ -72,7 +102,7 @@ export class ProductService {
   getAllData(): Observable<Products[]> {
     return this.http
       .get<Products>(
-        'https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products.json'
+        "https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products.json"
       )
       .pipe(
         //for create new array
@@ -91,9 +121,9 @@ export class ProductService {
   getDataWithId(id: string): Observable<Products> {
     return this.http
       .get<Products>(
-        'https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/' +
+        "https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/" +
           id +
-          '.json'
+          ".json"
       )
       .pipe(
         map((product) => {
@@ -107,17 +137,17 @@ export class ProductService {
     comment: Comment
   ): Observable<PostRealtimeDatabaseResponse> {
     return this.http.post<PostRealtimeDatabaseResponse>(
-      'https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/' +
+      "https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/" +
         productId +
-        '/comments.json',
+        "/comments.json",
       comment
     );
   }
   deleteProduct(productId: string): Observable<PostRealtimeDatabaseResponse> {
     return this.http.delete<PostRealtimeDatabaseResponse>(
-      'https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/' +
+      "https://angular-bootcamp-out-default-rtdb.europe-west1.firebasedatabase.app/products/" +
         productId +
-        '.json'
+        ".json"
     );
   }
 }

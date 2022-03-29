@@ -20,9 +20,17 @@
             >Error Occured, Try Again <fa-icon [icon]="faX"></fa-icon
           ></span>
           <!-- ERROR HANDLING -->
-          <button (click)="onDelete()" class="btn btn-danger btn-sm ms-1">
-            Del
-          </button>
+          <div class="d-flex">
+            <button
+              [routerLink]="['/edit', productId]"
+              class="btn btn-warning btn-sm ms-1"
+            >
+              Edit
+            </button>
+            <button (click)="onDelete()" class="btn btn-danger btn-sm ms-1">
+              Del
+            </button>
+          </div>
         </div>
       </div>
       <div class="d-flex justify-content-between">

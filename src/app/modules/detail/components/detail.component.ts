@@ -4,32 +4,32 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+} from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import {
   faCheck,
   faComment,
   faExclamation,
   faPencilAlt,
   faPlus,
-} from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
-import { Carts } from 'src/app/shared/models/carts.model';
-import { Comment } from 'src/app/shared/models/comment.model';
-import { Products } from 'src/app/shared/models/products.model';
-import { UserLoggedIn } from 'src/app/shared/models/userLoggedIn.model';
-import { CartsService } from 'src/app/modules/cart/services/carts.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ProductService } from 'src/app/shared/services/product.service';
+} from "@fortawesome/free-solid-svg-icons";
+import { Subscription } from "rxjs";
+import { Carts } from "src/app/shared/models/carts.model";
+import { Comment } from "src/app/shared/models/comment.model";
+import { Products } from "src/app/shared/models/products.model";
+import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
+import { CartsService } from "src/app/modules/cart/services/carts.service";
+import { AuthService } from "src/app/shared/services/auth.service";
+import { ProductService } from "src/app/shared/services/product.service";
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss'],
+  selector: "app-detail",
+  templateUrl: "./detail.component.html",
+  styleUrls: ["./detail.component.scss"],
 })
 export class DetailComponent implements OnInit, OnDestroy {
-  @ViewChild('input', { static: false }) input: ElementRef;
+  @ViewChild("input", { static: false }) input: ElementRef;
   //fontAwesome variables
   faPlus = faPlus;
   faComment = faComment;
@@ -72,7 +72,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //this method uses detail resolver to get data.
     this.paramsSubscription = this.route.data.subscribe((product: Products) => {
-      this.productById = product['product'];
+      this.productById = product["product"];
       if (this.productById.comments) {
         this.comments = Object.keys(this.productById.comments).map(
           (key) => this.productById.comments[key]
@@ -86,7 +86,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     //get product id for use comment push
     this.productIdSusbscription = this.route.params.subscribe(
       (params: Params) => {
-        this.productId = params['id'];
+        this.productId = params["id"];
       }
     );
     //create reactive Form
@@ -163,7 +163,7 @@ export class DetailComponent implements OnInit, OnDestroy {
           this.addedToCart = true;
           setTimeout(() => {
             //route to the cart page
-            this.router.navigate(['/cart', this.userLoggedIn.localId]);
+            this.router.navigate(["/cart", this.userLoggedIn.localId]);
           }, 1500);
         },
         (error) => {
@@ -176,7 +176,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.isLoading = true; //activate loading spinner on html
     //create an object to send database
     const comment: Comment = {
-      comment: this.commentForm.get('comment').value,
+      comment: this.commentForm.get("comment").value,
       email: this.userLoggedIn.email,
     };
     //call the post method on product service
@@ -193,7 +193,7 @@ export class DetailComponent implements OnInit, OnDestroy {
         this.isDeleted = true;
         this.isLoading = false;
         setTimeout(() => {
-          this.router.navigate(['/shop']); //route the shop
+          this.router.navigate(["/shop"]); //route the shop
         }, 1500);
       },
       //error handling for delete method
@@ -202,6 +202,8 @@ export class DetailComponent implements OnInit, OnDestroy {
       }
     );
   }
+  //this method sends a boolean to new component to set it for edit mode!
+
   //get data when a  new comment came to page.
   getDataWithId(): void {
     this.product.getDataWithId(this.productId).subscribe(
