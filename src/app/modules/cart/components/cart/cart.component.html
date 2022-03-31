@@ -12,7 +12,10 @@
       </div>
       <hr />
       <div *ngFor="let product of allCarts" class="row">
-        <div class="sm3 mb-3 col-sm-3">
+        <div
+          [routerLink]="['/detail', product.id]"
+          class="sm3 mb-3 col-sm-3 go-detail"
+        >
           <img
             [src]="product.imagePath || '../../../assets/logo.png'"
             alt="product-picture"
