@@ -114,6 +114,8 @@
     "hl": "Price High->Low",
     "lh": "Price Low->High",
     "prev": "Prev",
-    "next": "Next"
+    "next": "Next",
+    "card": "Card",
+    "list": "List"
   }
 }

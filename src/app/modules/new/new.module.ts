@@ -7,6 +7,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { AuthGuardService } from "../../shared/guards/auth-guard.service";
 import { AdminGuardService } from "../../shared/guards/admin-guard.service";
 import { TranslocoModule } from "@ngneat/transloco";
+import { DeactGuard } from "src/app/shared/guards/deact.guard";
 
 @NgModule({
   declarations: [NewComponent],
@@ -17,6 +18,7 @@ import { TranslocoModule } from "@ngneat/transloco";
         path: "",
         component: NewComponent,
         canActivate: [AuthGuardService, AdminGuardService],
+        canDeactivate: [DeactGuard],
       },
     ]),
     FormsModule,

@@ -25,6 +25,7 @@ export class NewComponent implements OnInit, OnDestroy {
   isLoading: boolean = false; //loading spinner variable
   isEditMode: boolean = false;
   productId: string;
+  canILeave: boolean = false; //a variable for check is it safe leave from page or not
 
   isSavedSubscription: Subscription; //subscriptions
 
@@ -121,9 +122,11 @@ export class NewComponent implements OnInit, OnDestroy {
       this.product.updateProductData(this.productId, productInfo).subscribe(
         () => {
           this.product.isSaveComplete.next(true);
+          this.canILeave = true;
         },
         (error) => {
           this.product.isSaveComplete.next(false);
+          this.canILeave = false;
         }
       );
     } else {

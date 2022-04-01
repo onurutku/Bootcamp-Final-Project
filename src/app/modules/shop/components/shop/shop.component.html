@@ -23,9 +23,14 @@
       <option value="HL">{{ "shop.hl" | transloco }}</option>
       <option value="LH">{{ "shop.lh" | transloco }}</option>
     </select>
+    <div>
+      <button (click)="listCardToggle()" class="focus ms-3">
+        {{ listOrCard ? ("shop.list" | transloco) : ("shop.card" | transloco) }}
+      </button>
+    </div>
   </div>
 </div>
-<div class="container mt-5 mb-5">
+<div *ngIf="listOrCard" class="container mt-5 mb-5">
   <div class="row mb-5">
     <div
       *ngFor="let product of products | search: categoryValue"
@@ -69,6 +74,57 @@
         </div>
       </div>
     </div>
+  </div>
+  <div
+    *ngIf="!categoryValue"
+    class="d-flex justify-content-center align-items-center flex-row"
+  >
+    <button (click)="pageDown()" class="btn btn-sm me-2">
+      {{ "shop.prev" | transloco }}
+    </button>
+    <span class="page-numbers">{{ currentPage + 1 }}/{{ totalPage + 1 }}</span>
+    <button (click)="pageUp()" class="btn btn-sm ms-2">
+      {{ "shop.next" | transloco }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!listOrCard" class="container mt-5 mb-5">
+  <div class="row mb-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Size</th>
+          <th scope="col">Price</th>
+          <th *ngIf="userLoggedIn.email == 'admin@admin.com'" scope="col">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products | search: categoryValue">
+          <th [routerLink]="['/detail', product.id]" scope="row">
+            <img
+              style="width: 70px; height: auto"
+              class="list-image"
+              [src]="product.imagePath"
+              alt="img"
+            />
+          </th>
+          <td>{{ product.title }}</td>
+          <td>{{ product.description | slice: 0:100 }}</td>
+          <td>S-XXL</td>
+          <td>{{ product.price }}</td>
+          <td *ngIf="userLoggedIn.email == 'admin@admin.com'">
+            <button class="btn bg-primary btn-sm me-1">Edit</button>
+            <button class="btn btn-sm">Del</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div
     *ngIf="!categoryValue"

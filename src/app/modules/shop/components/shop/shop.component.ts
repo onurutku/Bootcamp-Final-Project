@@ -5,34 +5,38 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-} from '@angular/core';
-import { ActivatedRoute, Data, Params, Router } from '@angular/router';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
-import { Products } from 'src/app/shared/models/products.model';
-import { ProductService } from 'src/app/shared/services/product.service';
+} from "@angular/core";
+import { ActivatedRoute, Data, Params, Router } from "@angular/router";
+import { faFile } from "@fortawesome/free-regular-svg-icons";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { Subscription } from "rxjs";
+import { Products } from "src/app/shared/models/products.model";
+import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
+import { AuthService } from "src/app/shared/services/auth.service";
+import { ProductService } from "src/app/shared/services/product.service";
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss'],
+  selector: "app-shop",
+  templateUrl: "./shop.component.html",
+  styleUrls: ["./shop.component.scss"],
 })
 export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('all', { static: false }) all: ElementRef; //"all" category button ,i'm using it for css
+  @ViewChild("all", { static: false }) all: ElementRef; //"all" category button ,i'm using it for css
   //fontawesome variable
   faCartPlus = faCartPlus;
+
   //others
   products: Products[] = [];
   categoryToggle: boolean;
   categoryValue: string;
   categories: string[] = [
-    'sweatshirt',
-    'pants',
-    'shirts',
-    'jumper',
-    'coats',
-    'jacket',
-    'shorts',
+    "sweatshirt",
+    "pants",
+    "shirts",
+    "jumper",
+    "coats",
+    "jacket",
+    "shorts",
   ];
   buttonValue: string;
   //subscription
@@ -46,14 +50,22 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   willSort: Products[] = [];
   query: string; //queryparameter from page;
   layer: Products[] = []; //layer product holder for pagination
+  userLoggedIn: UserLoggedIn; //user logged in
+
+  listOrCard: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private product: ProductService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    //to get user logged in from auth service
+    this.auth.userLoggedIn.subscribe((userLoggedIn: UserLoggedIn) => {
+      this.userLoggedIn = userLoggedIn;
+    });
     //get queryparam value to make a filter on page
     this.queryParamsSubs = this.route.queryParams.subscribe(
       (queryParams: Params) => {
@@ -70,13 +82,13 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     //resolver observable subscribe here
     this.productSubs = this.route.data.subscribe((products: Data) => {
-      this.willSort = products['product']; //all data from database
+      this.willSort = products["product"]; //all data from database
 
       //total page calculations and first 8 item on page
-      this.totalPage = Math.floor(products['product'].length / 8);
+      this.totalPage = Math.floor(products["product"].length / 8);
       for (let i = this.currentPage * 8; i < 8 * (this.currentPage + 1); i++) {
-        if (i < products['product'].length) {
-          this.products.push(products['product'][i]);
+        if (i < products["product"].length) {
+          this.products.push(products["product"][i]);
         } else {
           return;
         }
@@ -182,18 +194,18 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   //this will set some css to "all" category button when the url=/shop it means start page.!
   setCss(): void {
-    if (this.router.url == '/shop') {
-      this.all?.nativeElement.classList.add('focus');
-      this.all?.nativeElement.classList.remove('all');
-      this.buttonValue = '';
+    if (this.router.url == "/shop") {
+      this.all?.nativeElement.classList.add("focus");
+      this.all?.nativeElement.classList.remove("all");
+      this.buttonValue = "";
     } else {
-      this.all?.nativeElement.classList.add('all');
-      this.all?.nativeElement.classList.remove('focus');
+      this.all?.nativeElement.classList.add("all");
+      this.all?.nativeElement.classList.remove("focus");
     }
   }
   //sort by prices! hight to low or to high
   sortBy(what: string) {
-    if (what == 'HL') {
+    if (what == "HL") {
       this.willSort.sort((a, b) => {
         if (a.price > b.price) return -1;
         if (a.price < b.price) return 1;
@@ -215,5 +227,8 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   //get button value for make button css on hover dynamic
   sendVal(value: string): void {
     this.buttonValue = value;
+  }
+  listCardToggle(): void {
+    this.listOrCard = !this.listOrCard;
   }
 }

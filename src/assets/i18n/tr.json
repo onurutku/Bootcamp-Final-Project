@@ -114,6 +114,8 @@
     "hl": "Fiyat Yüksek->Düşük",
     "lh": "Fiyat Düşük->Yüksek",
     "prev": "Önceki",
-    "next": "Sonraki"
+    "next": "Sonraki",
+    "card": "Cart",
+    "list": "Liste"
   }
 }
