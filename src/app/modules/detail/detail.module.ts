@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DetailComponent } from './components/detail.component';
-import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared/shared.module';
-import { AuthGuardService } from '../../shared/guards/auth-guard.service';
-import { DetailResolverService } from './resolvers/detail-resolver.service';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { DetailComponent } from "./components/detail.component";
+import { RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "../../shared/shared.module";
+import { AuthGuardService } from "../../shared/guards/auth-guard.service";
+import { DetailResolverService } from "./resolvers/detail-resolver.service";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @NgModule({
   declarations: [DetailComponent],
@@ -14,7 +15,7 @@ import { DetailResolverService } from './resolvers/detail-resolver.service';
     CommonModule,
     RouterModule.forChild([
       {
-        path: '',
+        path: "",
         component: DetailComponent,
         canActivate: [AuthGuardService], //guard for auth
         resolve: { product: DetailResolverService }, //this method enter between router and service. and before you route the new page. Service run method and you can get data before you go the page.
@@ -24,6 +25,7 @@ import { DetailResolverService } from './resolvers/detail-resolver.service';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    TranslocoModule,
   ],
   exports: [DetailComponent],
 })

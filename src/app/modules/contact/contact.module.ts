@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ContactComponent } from './components/contact/contact.component';
-import { RouterModule } from '@angular/router';
-import { AuthGuardService } from '../../shared/guards/auth-guard.service';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ContactComponent } from "./components/contact/contact.component";
+import { RouterModule } from "@angular/router";
+import { AuthGuardService } from "../../shared/guards/auth-guard.service";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @NgModule({
   declarations: [ContactComponent],
@@ -10,11 +11,12 @@ import { AuthGuardService } from '../../shared/guards/auth-guard.service';
     CommonModule,
     RouterModule.forChild([
       {
-        path: '',
+        path: "",
         component: ContactComponent,
         canActivate: [AuthGuardService],
       },
     ]),
+    TranslocoModule,
   ],
   exports: [ContactComponent],
 })

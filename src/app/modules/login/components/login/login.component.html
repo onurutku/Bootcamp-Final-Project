@@ -1,7 +1,13 @@
 <div class="row">
   <div class="col-7 left"></div>
   <div class="col-5 right">
-    <div class="row d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center">
+      <div class="d-flex justify-content-end align-items-start pt-5 me-5">
+        <select #lang (click)="changeLang(lang.value)" id="language">
+          <option value="tr">🇹🇷</option>
+          <option selected value="en">🇬🇧</option>
+        </select>
+      </div>
       <div class="col-md-8">
         <form [formGroup]="loginForm" (submit)="onSubmit()">
           <div class="icon d-flex justify-content-center">
@@ -12,7 +18,7 @@
               <div
                 class="d-flex justify-content-center align-items-center flex-column"
               >
-                <h5 class="text-center">Login</h5>
+                <h5 class="text-center">{{ "login.title" | transloco }}</h5>
                 <app-loading-spinner
                   *ngIf="isLoading"
                   class="mb-4 ms-4"
@@ -22,7 +28,7 @@
                   id="success"
                   class="help-block text-success text-center"
                 >
-                  Login Successfull
+                  {{ "login.success-message" | transloco }}
                   <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                 </p>
                 <p *ngIf="loginErrorMessage" class="help-block text-danger">
@@ -38,9 +44,9 @@
             "
             class="help-block text-danger rounded"
           >
-            Invalid e-mail address format
+            {{ "login.invalid-email-format" | transloco }}
           </p>
-          <label class="mb-1">Email Address</label>
+          <label class="mb-1">{{ "login.email" | transloco }}</label>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1"
               ><fa-icon class="icon" [icon]="faUser"></fa-icon
@@ -48,11 +54,11 @@
             <input
               type="email"
               class="form-control"
-              placeholder="e-mail address"
+              placeholder="{{ 'login.email' | transloco }}"
               [formControlName]="'email'"
             />
           </div>
-          <label class="mb-1">Password</label>
+          <label class="mb-1">{{ "login.password" | transloco }}</label>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1"
               ><fa-icon class="icon" [icon]="faKey"></fa-icon
@@ -60,7 +66,7 @@
             <input
               type="password"
               class="form-control"
-              placeholder="password"
+              placeholder="{{ 'login.password' | transloco }}"
               [formControlName]="'password'"
             />
           </div>
@@ -69,14 +75,15 @@
             type="submit"
             class="btn btn-sm btn-primary float-end"
           >
-            Login
+            {{ "login.login-btn" | transloco }}
           </button>
           <button
             type="button"
             class="back btn btn-sm btn-primary float-end me-2"
             (click)="toRegisterPage()"
           >
-            <fa-icon class="icon" [icon]="faSquareLeft"></fa-icon> Register
+            <fa-icon class="icon" [icon]="faSquareLeft"></fa-icon>
+            {{ "login.register" | transloco }}
           </button>
         </form>
       </div>

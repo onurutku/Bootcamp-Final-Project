@@ -1,0 +1,119 @@
+{
+  "login": {
+    "title": "Login",
+    "email": "Email Address",
+    "password": "Password",
+    "register": "Register",
+    "login-btn": "Login",
+    "success-message": "Login Successfull",
+    "invalid-email-format": "Invalid e-mail address format"
+  },
+  "register": {
+    "title": "Register",
+    "email": "Email address",
+    "password": "Password",
+    "repassword": "Retype Password",
+    "register-btn": "Register",
+    "login": "Login",
+    "invalid-email-format": "Invalid Email Address Format",
+    "password-type-info": "Password should contains one uppercase,one lowercase character and it should be '6-30' character long"
+  },
+  "cart": {
+    "shopping-bag": "MY SHOPPING BAG",
+    "products": "Products",
+    "price": "Price",
+    "total-left": "Total",
+    "id": "ITEM ID:",
+    "qty": "QTY",
+    "remove-button": "REMOVE",
+    "summary": "SUMMARY",
+    "subtotal": "SUBTOTAL",
+    "shipping": "Shipping (10%)",
+    "tax": "Tax (18%)",
+    "total-right": "TOTAL",
+    "checkout-button": "CHECKOUT"
+  },
+  "contact": {
+    "contact": "Contact",
+    "phone": "Phone Number",
+    "email": "E-Mail",
+    "address": "Address"
+  },
+  "detail": {
+    "deleted": "Deleted",
+    "error": "Error Occured,Try Again",
+    "edit": "Edit",
+    "del": "Del",
+    "description": "DESCRIPTION",
+    "quantity": "QUANTITY",
+    "success": "Product Added to Cart Successfully!",
+    "add-to-cart": "ADD TO CART",
+    "comments": "Comments",
+    "write": "Write a Comment",
+    "saved": "Saved",
+    "send": "Send",
+    "stock": "Stock"
+  },
+  "footer": {
+    "copy": "Copyright Commerce.All Rights Reserved",
+    "powered": "Powered by Create Commerce"
+  },
+  "header": {
+    "shop": "Shop",
+    "cart": "Cart",
+    "new": "New",
+    "orders": "Orders",
+    "contact": "Contact",
+    "shopping-cart": "Shopping Cart",
+    "logout": "Logout",
+    "search": "Search"
+  },
+  "new": {
+    "new": "New Product",
+    "edit": "Edit Product",
+    "title-required": "Title Required",
+    "title-long": "Title too Long",
+    "title": "Title",
+    "category-req": "Category Required",
+    "category": "Category",
+    "sweatshirt": "Sweatshirt",
+    "pants": "Pants",
+    "shirts": "Shirts",
+    "jumper": "Jumper",
+    "coats": "Coats",
+    "jacket": "Jacket",
+    "shorts": "Shorts",
+    "price-req": "Price Required",
+    "price": "Price ($)",
+    "description-red": "Description Required",
+    "description": "Description",
+    "picture-req": "Picture Required",
+    "choose-pic": "Choose a Picture",
+    "stock-req": "Stock Required!",
+    "stock": "Stock",
+    "saved": "Saved",
+    "error": "Error Occured,Try Again",
+    "edit-btn": "Edit",
+    "save-btn": "Save"
+  },
+  "not-found": {
+    "redirect": "Redirecting in 3 seconds..."
+  },
+  "orders": {
+    "orders": "ORDERS",
+    "no": "No",
+    "image": "Image",
+    "id": "ID",
+    "title": "Title",
+    "quantity": "Quantity",
+    "owner": "Owner",
+    "send": "Send"
+  },
+  "shop": {
+    "sort": "Sort By",
+    "hl": "Price High->Low",
+    "lh": "Price Low->High",
+    "prev": "Prev",
+    "next": "Next"
+  }
+}

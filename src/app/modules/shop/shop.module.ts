@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "../../shared/shared.module";
 import { AuthGuardService } from "../../shared/guards/auth-guard.service";
 import { ShopResolverService } from "./resolvers/shop-resolver.service";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @NgModule({
   declarations: [ShopComponent],
@@ -19,6 +20,7 @@ import { ShopResolverService } from "./resolvers/shop-resolver.service";
       },
     ]),
     SharedModule,
+    TranslocoModule,
   ],
   exports: [ShopComponent],
 })

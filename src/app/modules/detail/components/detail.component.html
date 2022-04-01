@@ -14,10 +14,11 @@
         <div *ngIf="userLoggedIn.email == 'admin@admin.com'">
           <!-- ERROR HANDLING -->
           <span *ngIf="isDeleted" class="text-success float-left me-1"
-            >Deleted <fa-icon [icon]="faCheck"></fa-icon
+            >{{ "detail.deleted" | transloco }}
+            <fa-icon [icon]="faCheck"></fa-icon
           ></span>
           <span *ngIf="isDeleted == false" class="text-danger float-left"
-            >Error Occured, Try Again <fa-icon [icon]="faX"></fa-icon
+            >{{ "detail.error" | transloco }}<fa-icon [icon]="faX"></fa-icon
           ></span>
           <!-- ERROR HANDLING -->
           <div class="d-flex">
@@ -25,10 +26,10 @@
               [routerLink]="['/edit', productId]"
               class="btn btn-warning btn-sm ms-1"
             >
-              Edit
+              {{ "detail.edit" | transloco }}
             </button>
             <button (click)="onDelete()" class="btn btn-danger btn-sm ms-1">
-              Del
+              {{ "detail.del" | transloco }}
             </button>
           </div>
         </div>
@@ -40,7 +41,7 @@
       </div>
       <hr />
       <div class="d-flex justify-content-between">
-        <div class="price">DESCRIPTION</div>
+        <div class="price">{{ "detail.description" | transloco }}</div>
         <div class="comment">
           <fa-icon (click)="toggle()" class="me-3" [icon]="faPlus"></fa-icon>
         </div>
@@ -55,13 +56,15 @@
       <hr />
       <div class="d-flex justify-content-between flex-column mb-5">
         <div class="price">
-          <h5 class="quantity">QUANTITY</h5>
+          <h5 class="quantity">{{ "detail.quantity" | transloco }}</h5>
         </div>
         <div class="description mt-3">
           <span (click)="minus(input.value)" class="me-3">-</span>
           <input readonly #input type="number" min="0" value="1" />
           <span (click)="plus(input.value)" class="ms-3">+</span>
-          <span class="float-end me-4">Stock:{{ productById.stock }}</span>
+          <span class="float-end me-4"
+            >{{ "detail.stock" | transloco }}:{{ productById.stock }}</span
+          >
         </div>
       </div>
 
@@ -70,12 +73,12 @@
         <span
           *ngIf="addedToCart"
           class="help-block text-center rounded text-success mb-3 me-3 ms-3"
-          >Product Added to Cart Successfully!</span
+          >{{ "detail.success" | transloco }}</span
         >
         <span
           *ngIf="addedToCart == false"
           class="help-block text-center rounded text-danger mb-3 me-3 ms-3"
-          >Error Occured!</span
+          >{{ "detail.error" | transloco }}</span
         >
         <!-- ERROR HANDLING -->
         <button
@@ -83,19 +86,21 @@
           class="add-to-cart btn btn-sm"
           type="button"
         >
-          ADD TO CART
+          {{ "detail.add-to-cart" | transloco }}
         </button>
       </div>
       <div class="comment d-flex justify-content-between">
         <a (click)="commentToggle()" class="underline"
-          >{{ comments.length }} Comments&nbsp;&nbsp;<fa-icon
+          >{{ comments.length }}
+          {{ "detail.comments" | transloco }}&nbsp;&nbsp;<fa-icon
             class="comment-icon"
             [icon]="faComment"
           ></fa-icon
         ></a>
         <a (click)="writeCommentToggle()" class="underline"
-          ><fa-icon class="comment-icon" [icon]="faPen"></fa-icon
-          >&nbsp;&nbsp;Write a Comment</a
+          ><fa-icon class="comment-icon" [icon]="faPen"></fa-icon>&nbsp;&nbsp;{{
+            "detail.write" | transloco
+          }}</a
         >
       </div>
       <hr />
@@ -135,17 +140,18 @@
             <span
               *ngIf="isCommentSavedSuccessfully"
               class="text-success float-left"
-              >Saved <fa-icon [icon]="faCheck"></fa-icon
+              >{{ "detail.saved" | transloco }}
+              <fa-icon [icon]="faCheck"></fa-icon
             ></span>
             <span
               *ngIf="isCommentSavedSuccessfully == false"
               class="text-danger float-left"
-              >Error Occured, Try Again <fa-icon [icon]="faX"></fa-icon
+              >{{ "detail.error" | transloco }} <fa-icon [icon]="faX"></fa-icon
             ></span>
             <!-- ERROR HANDLING -->
             <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
             <button type="submit" class="btn btn-primary btn-sm float-end">
-              Send
+              {{ "detail.send" | transloco }}
             </button>
           </div>
         </form>

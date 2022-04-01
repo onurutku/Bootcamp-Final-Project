@@ -19,9 +19,9 @@
     </div>
 
     <select #opt (click)="sortBy(opt.value)" id="sort" class="ms-2">
-      <option selected disabled value="">Sort By</option>
-      <option value="HL">Price High->Low</option>
-      <option value="LH">Price Low->Hight</option>
+      <option selected disabled value="">{{ "shop.sort" | transloco }}</option>
+      <option value="HL">{{ "shop.hl" | transloco }}</option>
+      <option value="LH">{{ "shop.lh" | transloco }}</option>
     </select>
   </div>
 </div>
@@ -74,8 +74,12 @@
     *ngIf="!categoryValue"
     class="d-flex justify-content-center align-items-center flex-row"
   >
-    <button (click)="pageDown()" class="btn btn-sm me-2">Prev</button>
+    <button (click)="pageDown()" class="btn btn-sm me-2">
+      {{ "shop.prev" | transloco }}
+    </button>
     <span class="page-numbers">{{ currentPage + 1 }}/{{ totalPage + 1 }}</span>
-    <button (click)="pageUp()" class="btn btn-sm ms-2">Next</button>
+    <button (click)="pageUp()" class="btn btn-sm ms-2">
+      {{ "shop.next" | transloco }}
+    </button>
   </div>
 </div>

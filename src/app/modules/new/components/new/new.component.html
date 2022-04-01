@@ -4,7 +4,9 @@
       <img [src]="imageSrc || '../../../assets/dummy.jpg'" alt="picture" />
     </div>
     <div class="col-md-5 right p-5">
-      <h2 class="mb-4 h2">New Product</h2>
+      <h2 class="mb-4 h2">
+        {{ isEditMode ? ("new.edit" | transloco) : ("new.new" | transloco) }}
+      </h2>
       <form [formGroup]="productLoadForm" (submit)="onSubmit()">
         <div class="form-group">
           <p
@@ -14,7 +16,7 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Title Required!
+            {{ "new.title-required" | transloco }}
           </p>
           <p
             *ngIf="
@@ -23,15 +25,15 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Title too long!
+            {{ "new.title-long" | transloco }}
           </p>
-          <label for="title">Title</label>
+          <label for="title">{{ "new.title" | transloco }}</label>
           <input
             [formControlName]="'title'"
             type="text"
             class="form-control"
             id="title"
-            placeholder="title"
+            placeholder="{{ 'new.title' | transloco }}"
           />
         </div>
         <div class="form-group">
@@ -42,21 +44,19 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Category Required!
+            {{ "new.category-req" | transloco }}
           </p>
-          <label for="category">Category</label>
-          <select
-            [formControlName]="'category'"
-            class="form-select"
-            aria-label="Default select example"
-          >
-            <option value="sweatshirt">Sweatshirt</option>
-            <option value="pants">Pants</option>
-            <option value="shirts">Shirts</option>
-            <option value="jumper">Jumper</option>
-            <option value="coats">Coats</option>
-            <option value="jacket">Jacket</option>
-            <option value="shorts">Shorts</option>
+          <label for="category">{{ "new.category" | transloco }}</label>
+          <select [formControlName]="'category'" class="form-select">
+            <option value="sweatshirt">
+              {{ "new.sweatshirt" | transloco }}
+            </option>
+            <option value="pants">{{ "new.pants" | transloco }}</option>
+            <option value="shirts">{{ "new.shirts" | transloco }}</option>
+            <option value="jumper">{{ "new.jumper" | transloco }}</option>
+            <option value="coats">{{ "new.coats" | transloco }}</option>
+            <option value="jacket">{{ "new.jacket" | transloco }}</option>
+            <option value="shorts">{{ "new.shorts" | transloco }}</option>
           </select>
         </div>
         <div class="form-group">
@@ -67,15 +67,15 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Price Required!
+            {{ "new.price-req" | transloco }}
           </p>
-          <label for="price">Price ($)</label>
+          <label for="price">{{ "new.price" | transloco }}</label>
           <input
             [formControlName]="'price'"
             type="number"
             class="form-control"
             id="price"
-            placeholder="price"
+            placeholder="{{ 'new.price' | transloco }}"
           />
         </div>
         <div class="form-group">
@@ -86,14 +86,14 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Description Required!
+            {{ "new.description-red" | transloco }}
           </p>
-          <label for="description">Description</label>
+          <label for="description">{{ "new.description" | transloco }}</label>
           <textarea
             rows="4"
             [formControlName]="'description'"
             id="description"
-            placeholder="write some description about product"
+            placeholder="{{ 'new.description' | transloco }}"
           ></textarea>
         </div>
         <div class="form-group">
@@ -104,9 +104,9 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Picture Required!
+            {{ "new.picture-req" | transloco }}
           </p>
-          <label for="picture">Choose a Picture</label>
+          <label for="picture">{{ "new.choose-pic" | transloco }}</label>
           <input
             [formControlName]="'picture'"
             type="file"
@@ -124,25 +124,25 @@
             "
             class="help-block mb-0 bg-danger text-white rounded text-center"
           >
-            Stock Required!
+            {{ "new.stock-req" | transloco }}
           </p>
-          <label for="stock">Stock</label>
+          <label for="stock">{{ "new.stock" | transloco }}</label>
           <input
             [formControlName]="'stock'"
             type="number"
             class="form-control"
             id="stock"
-            placeholder="stock"
+            placeholder="{{ 'new.stock' | transloco }}"
           />
         </div>
         <div class="form-group">
           <span *ngIf="isDataSavedSuccessfully" class="text-success float-left"
-            >Saved <fa-icon [icon]="faCheck"></fa-icon
+            >{{ "new.saved" | transloco }} <fa-icon [icon]="faCheck"></fa-icon
           ></span>
           <span
             *ngIf="isDataSavedSuccessfully == false"
             class="text-danger float-left"
-            >Error Occured, Try Again <fa-icon [icon]="faX"></fa-icon
+            >{{ "new.error" | transloco }} <fa-icon [icon]="faX"></fa-icon
           ></span>
           <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
           <button
@@ -150,7 +150,11 @@
             type="submit"
             class="btn btn-primary btn-sm float-end"
           >
-            {{ isEditMode == true ? "Edit" : "Save" }}
+            {{
+              isEditMode == true
+                ? ("new.edit-btn" | transloco)
+                : ("new.save-btn" | transloco)
+            }}
           </button>
         </div>
       </form>

@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
-import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SharedModule } from '../../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HeaderComponent } from "./components/header/header.component";
+import { RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { SharedModule } from "../../shared/shared.module";
+import { FormsModule } from "@angular/forms";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     FontAwesomeModule,
     SharedModule,
-    FormsModule, //because of can use ngModel on search bar
+    FormsModule, //because of can use ngModel on search bar,
+    TranslocoModule,
   ],
   exports: [HeaderComponent],
 })

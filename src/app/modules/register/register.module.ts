@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RegisterComponent } from './components/register/register.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RouterModule } from '@angular/router';
-import { SharedModule } from '../../shared/shared.module';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RegisterComponent } from "./components/register/register.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { RouterModule } from "@angular/router";
+import { SharedModule } from "../../shared/shared.module";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -12,7 +13,7 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     RouterModule.forChild([
       {
-        path: '',
+        path: "",
         component: RegisterComponent,
       },
     ]),
@@ -20,6 +21,7 @@ import { SharedModule } from '../../shared/shared.module';
     ReactiveFormsModule,
     FontAwesomeModule,
     SharedModule,
+    TranslocoModule,
   ],
   exports: [RegisterComponent],
 })

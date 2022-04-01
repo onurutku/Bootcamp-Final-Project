@@ -1,21 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from "@angular/core";
 
 import {
   faCartArrowDown,
   faDoorOpen,
   faShoppingBag,
-} from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
-import { Carts } from 'src/app/shared/models/carts.model';
-import { UserLoggedIn } from 'src/app/shared/models/userLoggedIn.model';
-import { CartsService } from 'src/app/modules/cart/services/carts.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ProductService } from 'src/app/shared/services/product.service';
+} from "@fortawesome/free-solid-svg-icons";
+import { Subscription } from "rxjs";
+import { Carts } from "src/app/shared/models/carts.model";
+import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
+import { CartsService } from "src/app/modules/cart/services/carts.service";
+import { AuthService } from "src/app/shared/services/auth.service";
+import { ProductService } from "src/app/shared/services/product.service";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   userLoggedIn: UserLoggedIn; //user that loggedIn
@@ -36,7 +37,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private auth: AuthService,
     private carts: CartsService,
-    private product: ProductService
+    private product: ProductService,
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -92,10 +94,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   //bootstrap doesn't work i don't know why. so i added a method to toggle navbar responsive
   toggle(element: HTMLElement): void {
-    if (element.classList.contains('collapse')) {
-      element.classList.remove('collapse');
+    if (element.classList.contains("collapse")) {
+      element.classList.remove("collapse");
     } else {
-      element.classList.add('collapse');
+      element.classList.add("collapse");
     }
   }
   toggleCategories(): void {
@@ -111,5 +113,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   search(): void {
     this.product.search.next(this.filterWord);
     console.log(this.filterWord);
+  }
+  changeLang(lang: string): void {
+    this.translate.setActiveLang(lang);
   }
 }

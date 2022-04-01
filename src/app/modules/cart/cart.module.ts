@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CartComponent } from './components/cart/cart.component';
-import { SharedModule } from '../../shared/shared.module';
-import { AuthGuardService } from '../../shared/guards/auth-guard.service';
-import { CartsResolverService } from './resolvers/carts-resolver.service';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { CartComponent } from "./components/cart/cart.component";
+import { SharedModule } from "../../shared/shared.module";
+import { AuthGuardService } from "../../shared/guards/auth-guard.service";
+import { CartsResolverService } from "./resolvers/carts-resolver.service";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @NgModule({
   declarations: [CartComponent],
@@ -13,7 +14,7 @@ import { CartsResolverService } from './resolvers/carts-resolver.service';
     CommonModule,
     RouterModule.forChild([
       {
-        path: '',
+        path: "",
         component: CartComponent,
         canActivate: [AuthGuardService],
         resolve: { carts: CartsResolverService },
@@ -21,6 +22,7 @@ import { CartsResolverService } from './resolvers/carts-resolver.service';
     ]),
     FontAwesomeModule,
     SharedModule,
+    TranslocoModule,
   ],
   exports: [CartComponent],
 })

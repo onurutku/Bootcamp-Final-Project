@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormControl,
@@ -6,22 +6,23 @@ import {
   ValidationErrors,
   ValidatorFn,
   Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+} from "@angular/forms";
+import { Router } from "@angular/router";
 import {
   faCaretSquareLeft,
   faKey,
   faShieldAlt,
   faShoppingBag,
   faUser,
-} from '@fortawesome/free-solid-svg-icons';
-import { FormInput } from 'src/app/shared/models/formInputs.model';
-import { RegisterResponse } from 'src/app/shared/models/register-response.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
+} from "@fortawesome/free-solid-svg-icons";
+import { TranslocoService } from "@ngneat/transloco";
+import { FormInput } from "src/app/shared/models/formInputs.model";
+import { RegisterResponse } from "src/app/shared/models/register-response.model";
+import { AuthService } from "src/app/shared/services/auth.service";
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -40,17 +41,21 @@ export class RegisterComponent implements OnInit {
   checkPasswords: ValidatorFn = (
     registerForm: AbstractControl
   ): ValidationErrors | null => {
-    let pass = registerForm.get('password').value;
-    let confirmPass = registerForm.get('repassword').value;
+    let pass = registerForm.get("password").value;
+    let confirmPass = registerForm.get("repassword").value;
     if (pass != confirmPass) {
       this.passwordWarning = "Password doesn't match";
     } else {
-      this.passwordWarning = '';
+      this.passwordWarning = "";
     }
     return pass === confirmPass ? null : { notSame: true };
   };
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private translate: TranslocoService
+  ) {}
 
   ngOnInit(): void {
     //create register form and define validations
@@ -59,7 +64,7 @@ export class RegisterComponent implements OnInit {
         email: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [
           Validators.required,
-          Validators.pattern('((?=.*[a-z])(?=.*[A-Z]).{6,30})'),
+          Validators.pattern("((?=.*[a-z])(?=.*[A-Z]).{6,30})"),
         ]),
         repassword: new FormControl(null, Validators.required),
       },
@@ -70,8 +75,8 @@ export class RegisterComponent implements OnInit {
     this.isLoading = true;
     //get form values and send to service for registration
     const newUser: FormInput = {
-      email: this.registerForm.get('email').value,
-      password: this.registerForm.get('password').value,
+      email: this.registerForm.get("email").value,
+      password: this.registerForm.get("password").value,
     };
     //send data to auth service and call register method.
     this.auth.register(newUser).subscribe(
@@ -84,14 +89,14 @@ export class RegisterComponent implements OnInit {
       (error) => {
         //these error list conditions has taken from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
         switch (error.error.error.message) {
-          case 'EMAIL_EXISTS':
-            this.registerError = 'This email address already exist';
+          case "EMAIL_EXISTS":
+            this.registerError = "This email address already exist";
             break;
-          case 'OPERATION_NOT_ALLOWED':
-            this.registerError = 'Not-Allowed Try Again';
+          case "OPERATION_NOT_ALLOWED":
+            this.registerError = "Not-Allowed Try Again";
             break;
-          case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-            this.registerError = 'Too many attempts,please try again later';
+          case "TOO_MANY_ATTEMPTS_TRY_LATER":
+            this.registerError = "Too many attempts,please try again later";
             break;
         }
         this.isLoading = false; //close the spinner
@@ -99,6 +104,9 @@ export class RegisterComponent implements OnInit {
     );
   }
   toLoginPage(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
+  }
+  changeLang(lang: string): void {
+    this.translate.setActiveLang(lang);
   }
 }

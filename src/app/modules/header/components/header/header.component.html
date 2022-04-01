@@ -29,7 +29,7 @@
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
               class="nav-link text-white"
-              >Shop</a
+              >{{ "header.shop" | transloco }}</a
             >
           </li>
           <li class="nav-item">
@@ -37,7 +37,7 @@
               [routerLink]="['/cart', userLoggedIn.localId]"
               routerLinkActive="active"
               class="nav-link text-white"
-              >Cart</a
+              >{{ "header.cart" | transloco }}</a
             >
           </li>
           <li *ngIf="userLoggedIn.email === 'admin@admin.com'" class="nav-item">
@@ -45,7 +45,7 @@
               [routerLink]="['/new']"
               routerLinkActive="active"
               class="nav-link text-white"
-              >New</a
+              >{{ "header.new" | transloco }}</a
             >
           </li>
           <li *ngIf="userLoggedIn.email === 'admin@admin.com'" class="nav-item">
@@ -53,7 +53,7 @@
               [routerLink]="['/orders']"
               routerLinkActive="active"
               class="nav-link text-white"
-              >Orders</a
+              >{{ "header.orders" | transloco }}</a
             >
           </li>
           <li class="nav-item">
@@ -61,7 +61,7 @@
               [routerLink]="['/contact']"
               routerLinkActive="active"
               class="nav-link text-white"
-              >Contact</a
+              >{{ "header.contact" | transloco }}</a
             >
           </li>
         </ul>
@@ -71,7 +71,7 @@
             (keyup)="search()"
             class="form-control me-3"
             type="search"
-            placeholder="Search"
+            placeholder="{{ 'header.search' | transloco }}"
           />
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -96,15 +96,23 @@
                 <a
                   [routerLink]="['/cart', userLoggedIn.localId]"
                   class="dropdown-item"
-                  ><fa-icon [icon]="faCartCheck"></fa-icon>&nbsp;&nbsp;Shopping
-                  Cart</a
+                  ><fa-icon [icon]="faCartCheck"></fa-icon>&nbsp;&nbsp;{{
+                    "header.shopping-cart" | transloco
+                  }}</a
                 >
                 <div class="dropdown-divider"></div>
                 <a (click)="logout()" class="dropdown-item"
-                  ><fa-icon [icon]="faRightBracket"></fa-icon
-                  >&nbsp;&nbsp;Logout</a
+                  ><fa-icon [icon]="faRightBracket"></fa-icon>&nbsp;&nbsp;{{
+                    "header.logout" | transloco
+                  }}</a
                 >
               </div>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <select #lang (click)="changeLang(lang.value)" id="language">
+                <option value="tr">🇹🇷</option>
+                <option selected value="en">🇬🇧</option>
+              </select>
             </li>
           </ul>
         </div>

@@ -1,0 +1,119 @@
+{
+  "login": {
+    "title": "Giriş",
+    "email": "Eposta Adresi",
+    "password": "Şifre",
+    "register": "Kayıt",
+    "login-btn": "Giriş",
+    "success-message": "Giriş Başarılı",
+    "invalid-email-format": "Geçersiz email formatı"
+  },
+  "register": {
+    "title": "Kayıt",
+    "email": "Eposta Adresi",
+    "password": "Şifre",
+    "repassword": "Şifre Tekrarı",
+    "register-btn": "Kayıt",
+    "login": "Giriş",
+    "invalid-email-format": "Geçersiz email formatı",
+    "password-type-info": "Şifreniz en az bir büyük harf,bir küçük harf ve 6-30 karakter içermelidir."
+  },
+  "cart": {
+    "shopping-bag": "SEPETİM",
+    "products": "Ürünler",
+    "price": "Fiyatı",
+    "total-left": "Toplam",
+    "id": "ÜRÜN ID:",
+    "qty": "ADET:",
+    "remove-button": "Sil",
+    "summary": "ÖZET",
+    "subtotal": "ARA TOPLAM",
+    "shipping": "Kargo (10%)",
+    "tax": "KDV (18%)",
+    "total-right": "TOPLAM",
+    "checkout-button": "ÖDE"
+  },
+  "contact": {
+    "contact": "İletişim",
+    "phone": "Telefon Numarası",
+    "email": "E-Posta Adresi",
+    "address": "Adres"
+  },
+  "detail": {
+    "deleted": "Silindi",
+    "error": "Hata Oluştu, Tekrar Deneyin",
+    "edit": "Düzenle",
+    "del": "Sil",
+    "description": "ÜRÜN DETAYI",
+    "quantity": "ADET",
+    "success": "Ürün Sepete Eklendi",
+    "add-to-cart": "SEPETE EKLE",
+    "comments": "Yorumlar",
+    "write": "Yorum Oluştur",
+    "saved": "Kaydedildi",
+    "send": "Gönder",
+    "stock": "Stok"
+  },
+  "footer": {
+    "copy": "Tüm telif hakları Commerce'e aittir.",
+    "powered": "Commerce Tarafından Tasarlanmıştır"
+  },
+  "header": {
+    "shop": "Ürünler",
+    "cart": "Sepetim",
+    "new": "Ekle",
+    "orders": "Siparişler",
+    "contact": "İletişim",
+    "shopping-cart": "Sepetim",
+    "logout": "Çıkış",
+    "search": "Ara"
+  },
+  "new": {
+    "new": "Yeni Ürün Ekle",
+    "edit": "Ürünü Düzenle",
+    "title-required": "Ürün adı Gerekiyor",
+    "title-long": "Ürün adı çok uzun",
+    "title": "Ürün Adı",
+    "category-req": "Kategori Gerekiyor",
+    "category": "Kategori",
+    "sweatshirt": "Sweatshirt",
+    "pants": "Pantolon",
+    "shirts": "T-Shirt",
+    "jumper": "Spor Ayakkabı",
+    "coats": "Kaban",
+    "jacket": "Ceket",
+    "shorts": "Şort",
+    "price-req": "Fiyat Gerekiyor",
+    "price": "Fiyat ($)",
+    "description-red": "Açıklama Gerekiyor",
+    "description": "Açıklama",
+    "picture-req": "Resim Gerekiyor",
+    "choose-pic": "Bir Resim Seç",
+    "stock-req": "Stok Bilgisi Gerekiyor",
+    "stock": "Stok",
+    "saved": "Kaydedildi",
+    "error": "Hata oluştu,Tekrar Dene",
+    "edit-btn": "Düzenle",
+    "save-btn": "Kaydet"
+  },
+  "not-found": {
+    "redirect": "3 Saniye içerisinde yönlendirileceksiniz..."
+  },
+  "orders": {
+    "orders": "SİPARİŞLER",
+    "no": "No",
+    "image": "Resim",
+    "id": "Id",
+    "title": "Adı",
+    "quantity": "Miktarı",
+    "owner": "Siparişi Veren",
+    "send": "Gönder"
+  },
+  "shop": {
+    "sort": "Sırala",
+    "hl": "Fiyat Yüksek->Düşük",
+    "lh": "Fiyat Düşük->Yüksek",
+    "prev": "Önceki",
+    "next": "Sonraki"
+  }
+}
