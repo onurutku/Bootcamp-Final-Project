@@ -119,7 +119,8 @@
     "prev": "Önceki",
     "next": "Sonraki",
     "card": "Cart",
-    "list": "Liste"
+    "list": "Liste",
+    "add": "Sepete Ekle"
   },
   "dashboard": {
     "new-product": "Yeni Ürün Ekle",

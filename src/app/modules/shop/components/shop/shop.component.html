@@ -122,15 +122,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products | search: categoryValue">
-          <th
-            [routerLink]="
-              userLoggedIn.email == 'admin@admin.com'
-                ? ['/admin/detail', product.id]
-                : ['/detail', product.id]
-            "
-            scope="row"
-          >
+        <tr
+          [routerLink]="
+            userLoggedIn.email == 'admin@admin.com'
+              ? ['/admin/detail', product.id]
+              : ['/detail', product.id]
+          "
+          *ngFor="let product of products | search: categoryValue"
+        >
+          <th scope="row">
             <img
               style="width: 70px; height: auto"
               class="list-image"
@@ -142,16 +142,16 @@
           <td>{{ product.description | slice: 0:100 }}</td>
           <td>S-XXL</td>
           <td>{{ product.price }}$</td>
-          <td
-            class="table-buttons"
-            *ngIf="userLoggedIn.email == 'admin@admin.com'"
-          >
+          <td class="table-buttons">
+            <!-- <button class="btn btn-sm">{{ "shop.add" | transloco }}</button> -->
             <fa-icon
+              *ngIf="userLoggedIn.email == 'admin@admin.com'"
               [routerLink]="['/edit', product.id]"
               class="edit-icon"
               [icon]="faEdit"
             ></fa-icon>
             <fa-icon
+              *ngIf="userLoggedIn.email == 'admin@admin.com'"
               (click)="onDelete(product.id)"
               class="del-icon"
               [icon]="faTrash"

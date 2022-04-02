@@ -16,9 +16,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let order of results; let i = index">
+          <tr
+            [routerLink]="['/admin/detail', order.productId]"
+            *ngFor="let order of results; let i = index"
+          >
             <th scope="row">{{ i + 1 }}</th>
-            <td><img src="{{ order.imagePath }}" alt="" /></td>
+            <td><img src="{{ order.imagePath }}" alt="picture" /></td>
             <td>{{ order.productId }}</td>
             <td>{{ order.title }}</td>
             <td>{{ order.quantity }}</td>

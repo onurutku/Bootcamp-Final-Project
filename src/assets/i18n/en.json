@@ -119,7 +119,8 @@
     "prev": "Prev",
     "next": "Next",
     "card": "Card",
-    "list": "List"
+    "list": "List",
+    "add": "Add to Cart"
   },
   "dashboard": {
     "new-product": "New Product",
