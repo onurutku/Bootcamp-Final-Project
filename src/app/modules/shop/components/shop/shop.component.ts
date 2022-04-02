@@ -79,11 +79,8 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
         this.query = queryParams.search;
         this.buttonValue = this.query;
         if (queryParams.search == undefined) {
-          console.log("udefined grid" + queryParams.search);
-
           this.showAll();
         } else {
-          console.log("else gidi" + queryParams.search);
           // this.initShopDataSearch(queryParams.search);
           this.getAllData();
         }

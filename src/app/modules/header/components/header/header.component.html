@@ -40,28 +40,20 @@
               >{{ "header.cart" | transloco }}</a
             >
           </li>
-          <li *ngIf="userLoggedIn.email === 'admin@admin.com'" class="nav-item">
-            <a
-              [routerLink]="['/new']"
-              routerLinkActive="active"
-              class="nav-link text-white"
-              >{{ "header.new" | transloco }}</a
-            >
-          </li>
-          <li *ngIf="userLoggedIn.email === 'admin@admin.com'" class="nav-item">
-            <a
-              [routerLink]="['/orders']"
-              routerLinkActive="active"
-              class="nav-link text-white"
-              >{{ "header.orders" | transloco }}</a
-            >
-          </li>
           <li class="nav-item">
             <a
               [routerLink]="['/contact']"
               routerLinkActive="active"
               class="nav-link text-white"
               >{{ "header.contact" | transloco }}</a
+            >
+          </li>
+          <li *ngIf="userLoggedIn.email === 'admin@admin.com'" class="nav-item">
+            <a
+              [routerLink]="['/admin/users']"
+              routerLinkActive="active"
+              class="nav-link text-white"
+              >{{ "header.admin" | transloco }}</a
             >
           </li>
         </ul>

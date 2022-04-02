@@ -1,0 +1,22 @@
+.sidebar {
+  min-height: 100%;
+  background-color: #ac1a2e;
+}
+.body {
+  height: 100%;
+}
+.row {
+  height: 100%;
+}
+.list-group-item {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+// .list-group-item:hover {
+//   background-color: #4d4d4f;
+// }
+.list-group-item:focus {
+  background-color: #4d4d4f;
+}

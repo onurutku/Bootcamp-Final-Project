@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Carts } from 'src/app/shared/models/carts.model';
-import { Order } from 'src/app/shared/models/order.model';
-import { UserLoggedIn } from 'src/app/shared/models/userLoggedIn.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { OrdersService } from 'src/app/modules/orders/services/orders.service';
-import { CartsService } from '../../services/carts.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Data } from "@angular/router";
+import { Subscription } from "rxjs";
+import { Carts } from "src/app/shared/models/carts.model";
+import { Order } from "src/app/shared/models/order.model";
+import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
+import { AuthService } from "src/app/shared/services/auth.service";
+import { OrdersService } from "src/app/modules/admin/components/orders/services/orders.service";
+import { CartsService } from "../../services/carts.service";
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'],
+  selector: "app-cart",
+  templateUrl: "./cart.component.html",
+  styleUrls: ["./cart.component.scss"],
 })
 export class CartComponent implements OnInit, OnDestroy {
   userLoggedIn: UserLoggedIn; //user logged in variable
@@ -111,7 +111,7 @@ export class CartComponent implements OnInit, OnDestroy {
         this.carts.itemRemoved.next(productId);
       },
       (error) => {
-        this.errorMessage = 'Error Occured! Try again...';
+        this.errorMessage = "Error Occured! Try again...";
       }
     );
   }

@@ -20,21 +20,20 @@ import { ShopModule } from "../modules/shop/shop.module";
 import { SharedModule } from "../shared/shared.module";
 import { CartModule } from "../modules/cart/cart.module";
 import { DetailModule } from "../modules/detail/detail.module";
-import { OrdersModule } from "../modules/orders/orders.module";
-import { NewModule } from "../modules/new/new.module";
 import { ContactModule } from "../modules/contact/contact.module";
 import { CartsService } from "../modules/cart/services/carts.service";
 import { ProductService } from "../shared/services/product.service";
-import { OrdersService } from "../modules/orders/services/orders.service";
+import { OrdersService } from "../modules/admin/components/orders/services/orders.service";
 import { ShopResolverService } from "../modules/shop/resolvers/shop-resolver.service";
 import { DetailResolverService } from "../modules/detail/resolvers/detail-resolver.service";
 import { CartsResolverService } from "../modules/cart/resolvers/carts-resolver.service";
-import { OrderResolverService } from "../modules/orders/resolvers/order-resolver.service";
+import { OrderResolverService } from "../modules/admin/components/orders/resolvers/order-resolver.service";
 import { AdminGuardService } from "../shared/guards/admin-guard.service";
 import { AuthInterceptor } from "../shared/interceptors/auth.interceptor";
 import { AppComponent } from "./components/app.component";
 import { TranslocoRootModule } from "./transloco-root.module";
 import { TranslocoService } from "@ngneat/transloco";
+import { AdminModule } from "../modules/admin/admin.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -58,10 +57,9 @@ import { TranslocoService } from "@ngneat/transloco";
     SharedModule,
     CartModule,
     DetailModule,
-    OrdersModule,
-    NewModule,
     ContactModule,
     TranslocoRootModule,
+    AdminModule,
   ],
   providers: [
     TranslocoService,

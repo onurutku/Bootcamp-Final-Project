@@ -1,71 +1,75 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/shop',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "/shop",
+    pathMatch: "full",
   },
   {
-    path: 'login',
+    path: "login",
     loadChildren: () =>
-      import('../modules/login/login.module').then((m) => m.LoginModule),
+      import("../modules/login/login.module").then((m) => m.LoginModule),
   },
   {
-    path: 'register',
+    path: "register",
     loadChildren: () =>
-      import('../modules/register/register.module').then(
+      import("../modules/register/register.module").then(
         (m) => m.RegisterModule
       ),
   },
   {
-    path: 'shop',
+    path: "shop",
     loadChildren: () =>
-      import('../modules/shop/shop.module').then((m) => m.ShopModule),
+      import("../modules/shop/shop.module").then((m) => m.ShopModule),
   },
   {
-    path: 'cart/:id',
+    path: "cart/:id",
     loadChildren: () =>
-      import('../modules/cart/cart.module').then((m) => m.CartModule),
+      import("../modules/cart/cart.module").then((m) => m.CartModule),
   },
   {
-    path: 'contact',
+    path: "contact",
     loadChildren: () =>
-      import('../modules/contact/contact.module').then((m) => m.ContactModule),
+      import("../modules/contact/contact.module").then((m) => m.ContactModule),
+  },
+  // {
+  //   path: "new",
+  //   loadChildren: () =>
+  //     import("../modules/admin/components/new/new.module").then(
+  //       (m) => m.NewModule
+  //     ),
+  // },
+  // {
+  //   path: "edit/:id",
+  //   loadChildren: () =>
+  //     import("../modules/admin/components/new/new.module").then(
+  //       (m) => m.NewModule
+  //     ),
+  // },
+  {
+    path: "detail/:id",
+    loadChildren: () =>
+      import("../modules/detail/detail.module").then((m) => m.DetailModule),
   },
   {
-    path: 'new',
+    path: "admin",
     loadChildren: () =>
-      import('../modules/new/new.module').then((m) => m.NewModule),
-  },
-  {
-    path: 'edit/:id',
-    loadChildren: () =>
-      import('../modules/new/new.module').then((m) => m.NewModule),
-  },
-  {
-    path: 'orders',
-    loadChildren: () =>
-      import('../modules/orders/orders.module').then((m) => m.OrdersModule),
-  },
-  {
-    path: 'detail/:id',
-    loadChildren: () =>
-      import('../modules/detail/detail.module').then((m) => m.DetailModule),
+      import("../modules/admin/admin.module").then((m) => m.AdminModule),
   },
 
   {
-    path: 'not-found',
+    path: "not-found",
     loadChildren: () =>
-      import('../modules/not-found/not-found.module').then(
+      import("../modules/not-found/not-found.module").then(
         (m) => m.NotFoundModule
       ),
   },
   //wildcard set undefined path redirect to not found component
   {
-    path: '**',
-    redirectTo: '/not-found',
+    path: "**",
+    redirectTo: "/not-found",
   },
 ];
 

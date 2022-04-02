@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-2 sidebar">
+    <ul class="list-group mt-3">
+      <li
+        [routerLink]="['/admin/users']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="list-group-item"
+      >
+        Users
+      </li>
+      <li
+        [routerLink]="['/admin/new']"
+        routerLinkActive="active"
+        class="list-group-item"
+      >
+        New Product
+      </li>
+      <li
+        [routerLink]="['/admin/shop']"
+        routerLinkActive="active"
+        class="list-group-item"
+      >
+        Product List
+      </li>
+      <li
+        [routerLink]="['/admin/orders']"
+        routerLinkActive="active"
+        class="list-group-item"
+      >
+        Orders
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-10 body">
+    <router-outlet></router-outlet>
+  </div>
+</div>

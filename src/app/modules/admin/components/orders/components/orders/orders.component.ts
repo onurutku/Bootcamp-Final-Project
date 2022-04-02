@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Order } from 'src/app/shared/models/order.model';
-import { CartsService } from 'src/app/modules/cart/services/carts.service';
-import { OrdersService } from 'src/app/modules/orders/services/orders.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
+import { Order } from "src/app/shared/models/order.model";
+import { CartsService } from "src/app/modules/cart/services/carts.service";
+import { OrdersService } from "src/app/modules/admin/components/orders/services/orders.service";
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss'],
+  selector: "app-orders",
+  templateUrl: "./orders.component.html",
+  styleUrls: ["./orders.component.scss"],
 })
 export class OrdersComponent implements OnInit, OnDestroy {
   results: Order[] = []; //for send html side
@@ -56,7 +56,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   getOrdersByResolver(): void {
     //for reach all orders i user object to array conversion and create a new array to send html resolver used here!
     this.routeSubs = this.route.data.subscribe((orders: Order) => {
-      orders['orders'].forEach((orderObject: Order) => {
+      orders["orders"].forEach((orderObject: Order) => {
         for (let key in orderObject) {
           if (orderObject[key] != null) {
             orderObject[key].forEach((order: Order) => {

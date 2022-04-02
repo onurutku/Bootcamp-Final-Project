@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { NewComponent } from "src/app/modules/new/components/new/new.component";
+import { NewComponent } from "src/app/modules/admin/components/new/new.component";
 
 @Injectable({
   providedIn: "root",
