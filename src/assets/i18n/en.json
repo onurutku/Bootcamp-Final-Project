@@ -6,7 +6,10 @@
     "register": "Register",
     "login-btn": "Login",
     "success-message": "Login Successfull",
-    "invalid-email-format": "Invalid e-mail address format"
+    "invalid-email-format": "Invalid e-mail address format",
+    "e-mail-sent": "Password reset e-mail has been sent. Please check your mailbox",
+    "send-button": "Send",
+    "forgot": "Forgot your password?"
   },
   "register": {
     "title": "Register",
@@ -117,5 +120,10 @@
     "next": "Next",
     "card": "Card",
     "list": "List"
+  },
+  "dashboard": {
+    "new-product": "New Product",
+    "product-list": "Product List",
+    "orders": "Orders"
   }
 }

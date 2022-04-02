@@ -6,7 +6,10 @@
     "register": "Kayıt",
     "login-btn": "Giriş",
     "success-message": "Giriş Başarılı",
-    "invalid-email-format": "Geçersiz email formatı"
+    "invalid-email-format": "Geçersiz email formatı",
+    "e-mail-sent": "Şifre sıfırlama e-postası gönderildi.",
+    "send-button": "Gönder",
+    "forgot": "Şifrenizi mi unuttunuz?"
   },
   "register": {
     "title": "Kayıt",
@@ -117,5 +120,10 @@
     "next": "Sonraki",
     "card": "Cart",
     "list": "Liste"
+  },
+  "dashboard": {
+    "new-product": "Yeni Ürün Ekle",
+    "product-list": "Ürünler",
+    "orders": "Siparişler"
   }
 }

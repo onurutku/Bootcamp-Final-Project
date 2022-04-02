@@ -1,24 +1,29 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { RegisterResponse } from '../models/register-response.model';
-import { FormInput } from '../models/formInputs.model';
-import { LoginResponse } from '../models/login-response.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { UserLoggedIn } from '../models/userLoggedIn.model';
-import { Router } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { RegisterResponse } from "../models/register-response.model";
+import { FormInput } from "../models/formInputs.model";
+import { LoginResponse } from "../models/login-response.model";
+import { BehaviorSubject, Observable, tap } from "rxjs";
+import { UserLoggedIn } from "../models/userLoggedIn.model";
+import { Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   userLoggedIn = new BehaviorSubject<UserLoggedIn>(null);
   timeForTimer: number = 3600 * 1000;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public angularfireAuth: AngularFireAuth
+  ) {}
 
   //firebase endpoint signUp method returns to register component.ts
   register(newUser: FormInput): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0',
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
       {
         email: newUser.email,
         password: newUser.password,
@@ -30,7 +35,7 @@ export class AuthService {
     //login method it takes form user information
     return this.http
       .post<LoginResponse>( //post method to firebase auth
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0',
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
         {
           //firebase authentication post methods body
           email: user.email,
@@ -54,14 +59,14 @@ export class AuthService {
           };
           //next data with subject and create a user in sessionStorage
           this.userLoggedIn.next(userLoggedIn);
-          sessionStorage.setItem('user', JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
+          sessionStorage.setItem("user", JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
           this.autoLogout(this.timeForTimer);
         })
       );
   }
   //auto login on page refresh
   autoLogin() {
-    const sessionStorageUser = JSON.parse(sessionStorage.getItem('user')); //get data from sessionStorage for new userObject
+    const sessionStorageUser = JSON.parse(sessionStorage.getItem("user")); //get data from sessionStorage for new userObject
 
     if (!sessionStorageUser) {
       //security return
@@ -77,7 +82,7 @@ export class AuthService {
       expirationDate: expirationDate,
     };
     //update session storage for time
-    sessionStorage.setItem('user', JSON.stringify(newUserFromStorage));
+    sessionStorage.setItem("user", JSON.stringify(newUserFromStorage));
     this.userLoggedIn.next(newUserFromStorage); //send user again to interceptor
     this.autoLogout(this.timeForTimer); //start new timer
   }
@@ -85,14 +90,17 @@ export class AuthService {
   //logout method
   logout(): void {
     this.userLoggedIn.next(null); //this next null to subject to block data transfer to database because database needs token to transfer data for security
-    sessionStorage.removeItem('user'); //also remove user from session storage to block login condition for user on pages.!
-    this.router.navigate(['/login']); //route to login page
+    sessionStorage.removeItem("user"); //also remove user from session storage to block login condition for user on pages.!
+    this.router.navigate(["/login"]); //route to login page
   }
   //auto logout timer
   autoLogout(time: number): void {
     setTimeout(() => {
       this.logout();
-      this.router.navigate(['/login']);
+      this.router.navigate(["/login"]);
     }, time);
+  }
+  resetPassword(email: string) {
+    return this.angularfireAuth.sendPasswordResetEmail(email);
   }
 }

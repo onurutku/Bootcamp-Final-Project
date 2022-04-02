@@ -34,6 +34,7 @@ import { AppComponent } from "./components/app.component";
 import { TranslocoRootModule } from "./transloco-root.module";
 import { TranslocoService } from "@ngneat/transloco";
 import { AdminModule } from "../modules/admin/admin.module";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,6 +49,7 @@ import { AdminModule } from "../modules/admin/admin.module";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     LoginModule,
     RegisterModule,
     NotFoundModule,

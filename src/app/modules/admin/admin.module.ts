@@ -5,7 +5,6 @@ import { RouterModule } from "@angular/router";
 import { AdminGuardService } from "src/app/shared/guards/admin-guard.service";
 import { AuthGuardService } from "src/app/shared/guards/auth-guard.service";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { UsersComponent } from "./components/users/users.component";
 import { NewComponent } from "./components/new/new.component";
 import { OrdersComponent } from "./components/orders/components/orders/orders.component";
 import { OrderResolverService } from "./components/orders/resolvers/order-resolver.service";
@@ -19,12 +18,7 @@ import { DetailComponent } from "../detail/components/detail.component";
 import { DetailResolverService } from "../detail/resolvers/detail-resolver.service";
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    UsersComponent,
-    OrdersComponent,
-    NewComponent,
-  ],
+  declarations: [DashboardComponent, OrdersComponent, NewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -33,10 +27,6 @@ import { DetailResolverService } from "../detail/resolvers/detail-resolver.servi
         component: DashboardComponent,
         canActivate: [AuthGuardService, AdminGuardService],
         children: [
-          {
-            path: "users",
-            component: UsersComponent,
-          },
           {
             path: "new",
             component: NewComponent,
@@ -72,6 +62,6 @@ import { DetailResolverService } from "../detail/resolvers/detail-resolver.servi
     SharedModule,
     TranslocoModule,
   ],
-  exports: [DashboardComponent, UsersComponent, OrdersComponent, NewComponent],
+  exports: [DashboardComponent, OrdersComponent, NewComponent],
 })
 export class AdminModule {}

@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
   loggedIn: boolean = false; //for show login message
   isLoading: boolean = false; //for loading spinner effect
   loginErrorMessage: string; //firebase login error messages
+  isForgot: boolean = false; //is password forgottten
+  resetEmailSentMessage: boolean = false; //a message to user for give information about email send
 
   //fontAwesome variable
   faUser = faUser;
@@ -83,7 +85,29 @@ export class LoginComponent implements OnInit {
   toRegisterPage(): void {
     this.router.navigate(["/register"]);
   }
+  //transloco
   changeLang(lang: string): void {
     this.translate.setActiveLang(lang);
+  }
+  //change UI to forgot password form
+  forgot(): void {
+    this.isForgot = true;
+  }
+  //change UI to login form
+  toLogin(): void {
+    this.isForgot = false;
+  }
+  //angular fire auth module reset password method
+  resetPassword(email: string): void {
+    this.auth.resetPassword(email);
+    this.resetEmailSentMessage = true;
+    this.timer();
+  }
+  //a timer for giving information to user. send a message to UI
+  timer(): void {
+    setTimeout(() => {
+      this.isForgot = false;
+      this.resetEmailSentMessage = false;
+    }, 2000);
   }
 }

@@ -46,46 +46,86 @@
           >
             {{ "login.invalid-email-format" | transloco }}
           </p>
-          <label class="mb-1">{{ "login.email" | transloco }}</label>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"
-              ><fa-icon class="icon" [icon]="faUser"></fa-icon
-            ></span>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="{{ 'login.email' | transloco }}"
-              [formControlName]="'email'"
-            />
+          <div *ngIf="!isForgot">
+            <label class="mb-1">{{ "login.email" | transloco }}</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"
+                ><fa-icon class="icon" [icon]="faUser"></fa-icon
+              ></span>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="{{ 'login.email' | transloco }}"
+                [formControlName]="'email'"
+              />
+            </div>
+            <label class="mb-1">{{ "login.password" | transloco }}</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"
+                ><fa-icon class="icon" [icon]="faKey"></fa-icon
+              ></span>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="{{ 'login.password' | transloco }}"
+                [formControlName]="'password'"
+              />
+            </div>
+            <button
+              [disabled]="loginForm.invalid"
+              type="submit"
+              class="btn btn-sm btn-primary float-end"
+            >
+              {{ "login.login-btn" | transloco }}
+            </button>
+            <button
+              type="button"
+              class="back btn btn-sm btn-primary float-end me-2"
+              (click)="toRegisterPage()"
+            >
+              <fa-icon class="icon" [icon]="faSquareLeft"></fa-icon>
+              {{ "login.register" | transloco }}
+            </button>
           </div>
-          <label class="mb-1">{{ "login.password" | transloco }}</label>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"
-              ><fa-icon class="icon" [icon]="faKey"></fa-icon
-            ></span>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="{{ 'login.password' | transloco }}"
-              [formControlName]="'password'"
-            />
+          <div *ngIf="isForgot">
+            <p
+              *ngIf="resetEmailSentMessage"
+              class="help-block bg-success text-white rounded"
+            >
+              {{ "login.e-mail-sent" | transloco }}
+            </p>
+            <label class="mb-1">{{ "login.email" | transloco }}</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"
+                ><fa-icon class="icon" [icon]="faUser"></fa-icon
+              ></span>
+              <input
+                #passwordReset
+                type="email"
+                class="form-control"
+                placeholder="{{ 'login.email' | transloco }}"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="resetPassword(passwordReset.value)"
+              class="btn btn-primary btn-sm float-end mb-3"
+            >
+              {{ "login.send-button" | transloco }}
+            </button>
+            <button
+              type="button"
+              class="back btn btn-sm btn-primary float-end me-2"
+              (click)="toLogin()"
+            >
+              <fa-icon class="icon" [icon]="faSquareLeft"></fa-icon>
+              {{ "login.login-btn" | transloco }}
+            </button>
           </div>
-          <button
-            [disabled]="loginForm.invalid"
-            type="submit"
-            class="btn btn-sm btn-primary float-end"
-          >
-            {{ "login.login-btn" | transloco }}
-          </button>
-          <button
-            type="button"
-            class="back btn btn-sm btn-primary float-end me-2"
-            (click)="toRegisterPage()"
-          >
-            <fa-icon class="icon" [icon]="faSquareLeft"></fa-icon>
-            {{ "login.register" | transloco }}
-          </button>
         </form>
+        <a *ngIf="!isForgot" (click)="forgot()" class="forgot float-end mt-4">{{
+          "login.forgot" | transloco
+        }}</a>
       </div>
     </div>
   </div>
