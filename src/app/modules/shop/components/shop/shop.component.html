@@ -91,7 +91,7 @@
 
 <div *ngIf="!listOrCard" class="container mt-5 mb-5">
   <div class="row mb-5">
-    <table class="table">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th scope="col">Image</th>
@@ -117,10 +117,21 @@
           <td>{{ product.title }}</td>
           <td>{{ product.description | slice: 0:100 }}</td>
           <td>S-XXL</td>
-          <td>{{ product.price }}</td>
-          <td *ngIf="userLoggedIn.email == 'admin@admin.com'">
-            <button class="btn bg-primary btn-sm me-1">Edit</button>
-            <button class="btn btn-sm">Del</button>
+          <td>{{ product.price }}$</td>
+          <td
+            class="table-buttons"
+            *ngIf="userLoggedIn.email == 'admin@admin.com'"
+          >
+            <fa-icon
+              [routerLink]="['/edit', product.id]"
+              class="edit-icon"
+              [icon]="faEdit"
+            ></fa-icon>
+            <fa-icon
+              (click)="onDelete(product.id)"
+              class="del-icon"
+              [icon]="faTrash"
+            ></fa-icon>
           </td>
         </tr>
       </tbody>

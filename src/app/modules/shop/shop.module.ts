@@ -6,6 +6,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { AuthGuardService } from "../../shared/guards/auth-guard.service";
 import { ShopResolverService } from "./resolvers/shop-resolver.service";
 import { TranslocoModule } from "@ngneat/transloco";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [ShopComponent],
@@ -21,6 +22,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     ]),
     SharedModule,
     TranslocoModule,
+    FontAwesomeModule,
   ],
   exports: [ShopComponent],
 })

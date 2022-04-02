@@ -21,6 +21,7 @@ export class ProductService {
   category = new Subject<string>(); //trigger for category select
   search = new Subject<any>(); //search bar value to shop component
   categoryToggle = new Subject<boolean>(); //toggle for show category or not
+  isDeleted = new Subject<boolean>();
 
   constructor(private http: HttpClient, private storage: AngularFireStorage) {}
 

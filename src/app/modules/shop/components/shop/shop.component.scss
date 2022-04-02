@@ -124,3 +124,17 @@ img {
 th {
   cursor: pointer;
 }
+.table-buttons {
+  min-width: 110px;
+}
+.edit-icon {
+  color: green;
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+.del-icon {
+  color: red;
+  font-size: 1.3rem;
+  cursor: pointer;
+}

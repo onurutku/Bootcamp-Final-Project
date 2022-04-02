@@ -8,7 +8,12 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, Data, Params, Router } from "@angular/router";
 import { faFile } from "@fortawesome/free-regular-svg-icons";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartPlus,
+  faEdit,
+  faPenAlt,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { Subscription } from "rxjs";
 import { Products } from "src/app/shared/models/products.model";
 import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
@@ -24,6 +29,8 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild("all", { static: false }) all: ElementRef; //"all" category button ,i'm using it for css
   //fontawesome variable
   faCartPlus = faCartPlus;
+  faTrash = faTrashAlt;
+  faEdit = faEdit;
 
   //others
   products: Products[] = [];
@@ -72,9 +79,13 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
         this.query = queryParams.search;
         this.buttonValue = this.query;
         if (queryParams.search == undefined) {
+          console.log("udefined grid" + queryParams.search);
+
           this.showAll();
         } else {
-          this.initShopDataSearch(queryParams.search);
+          console.log("else gidi" + queryParams.search);
+          // this.initShopDataSearch(queryParams.search);
+          this.getAllData();
         }
         //set button css
         this.setCss();
@@ -100,6 +111,15 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     this.product.categoryToggle.subscribe((status) => {
       this.categoryToggle = status;
+    });
+    this.product.isDeleted.subscribe((isDeleted: boolean) => {
+      this.getAllData();
+    });
+  }
+  getAllData() {
+    this.product.getAllData().subscribe((products: Products[]) => {
+      this.willSort = products;
+      this.initShopDataSearch(this.query);
     });
   }
   ngAfterViewInit(): void {
@@ -230,5 +250,19 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   listCardToggle(): void {
     this.listOrCard = !this.listOrCard;
+  }
+  //delete production method
+  onDelete(productId: string): void {
+    // this.isLoading = true;
+    this.product.deleteProduct(productId).subscribe(
+      (response: null) => {
+        // this.isLoading = false;
+        this.product.isDeleted.next(true);
+      },
+      //error handling for delete method
+      (error) => {
+        // this.isDeleted = false;
+      }
+    );
   }
 }
