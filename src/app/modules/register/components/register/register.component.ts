@@ -140,4 +140,14 @@ export class RegisterComponent implements OnInit {
   changeLang(lang: string): void {
     this.translate.setActiveLang(lang);
   }
+  signInGoogle() {
+    this.auth.loginWithGoogle().then(() => {
+      this.router.navigate(["/shop"]); //route to dashboard
+    });
+  }
+  signInGithub() {
+    this.auth.loginWithGithub().then(() => {
+      this.router.navigate(["/shop"]); //route to dashboard
+    });
+  }
 }

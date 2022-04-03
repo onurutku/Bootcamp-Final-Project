@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
 import { UserLoggedIn } from "../models/userLoggedIn.model";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 @Injectable({
   providedIn: "root",
@@ -18,7 +20,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    public angularfireAuth: AngularFireAuth
+    private angularfireAuth: AngularFireAuth
   ) {}
 
   //firebase endpoint signUp method returns to register component.ts
@@ -99,6 +101,40 @@ export class AuthService {
     //     })
     //   );
     //---------------------------------OLD LOGIN METHOD--------------------------------
+  }
+  //continue with google
+  async loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider(); //create a provider
+    const credential = await this.angularfireAuth.signInWithPopup(provider); //open a popup for google provider
+    const token = await credential.user.getIdToken(true); //to get token from API firebase method
+    const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+    const userLoggedIn: UserLoggedIn = {
+      email: credential.user.email,
+      localId: credential.user.uid,
+      idToken: token,
+      expirationDate: expirationDate,
+    };
+
+    this.userLoggedIn.next(userLoggedIn);
+    sessionStorage.setItem("user", JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
+    this.autoLogout(this.timeForTimer);
+  }
+  //continue with github;
+  async loginWithGithub() {
+    const provider = new firebase.auth.GithubAuthProvider(); //create a github provider
+    const credential = await this.angularfireAuth.signInWithPopup(provider); //open a popup for github provider
+    const token = await credential.user.getIdToken(true); //to get token from API firebase method
+    const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+    const userLoggedIn: UserLoggedIn = {
+      email: credential.user.email,
+      localId: credential.user.uid,
+      idToken: token,
+      expirationDate: expirationDate,
+    };
+
+    this.userLoggedIn.next(userLoggedIn);
+    sessionStorage.setItem("user", JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
+    this.autoLogout(this.timeForTimer);
   }
   //auto login on page refresh
   autoLogin() {

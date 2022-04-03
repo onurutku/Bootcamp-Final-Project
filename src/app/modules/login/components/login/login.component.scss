@@ -68,3 +68,17 @@ select {
   font-size: 0.9rem;
   cursor: pointer;
 }
+.google {
+  font-size: 0.9rem;
+  border: 1px solid lightgray;
+  box-shadow: 5px 5px 10px #888888;
+  cursor: pointer;
+}
+.github {
+  font-size: 0.9rem;
+  border: 1px solid lightgray;
+  box-shadow: 5px 5px 10px #888888;
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+}

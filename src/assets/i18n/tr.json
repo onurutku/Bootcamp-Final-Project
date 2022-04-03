@@ -12,7 +12,9 @@
     "forgot": "Şifrenizi mi unuttunuz?",
     "verify": "Lütfen önce üyeliğiniz aktif ediniz.",
     "email-not-found": "E-Posta adresi kayıtlı değil",
-    "password-wrong": "Yanlış Şifre"
+    "password-wrong": "Yanlış Şifre",
+    "withGoogle": "Google ile devam et",
+    "withGithub": "Github ile devam et"
   },
   "register": {
     "title": "Kayıt",

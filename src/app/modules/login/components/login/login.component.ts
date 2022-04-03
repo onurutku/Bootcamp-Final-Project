@@ -142,4 +142,16 @@ export class LoginComponent implements OnInit {
       this.loginErrorMessage = "";
     }, 2000);
   }
+  signInGoogle() {
+    this.auth.loginWithGoogle().then(() => {
+      this.loggedIn = true; //to show successfull login message
+      this.router.navigate(["/shop"]); //route to dashboard
+    });
+  }
+  signInGithub() {
+    this.auth.loginWithGithub().then(() => {
+      this.loggedIn = true; //to show successfull login message
+      this.router.navigate(["/shop"]); //route to dashboard
+    });
+  }
 }

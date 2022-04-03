@@ -12,7 +12,9 @@
     "forgot": "Forgot your password?",
     "verify": "Verify your email address first",
     "email-not-found": "Email not found",
-    "password-wrong": "Wrong Password"
+    "password-wrong": "Wrong Password",
+    "withGoogle": "Continue with Google",
+    "withGithub": "Continue with Github"
   },
   "register": {
     "title": "Register",

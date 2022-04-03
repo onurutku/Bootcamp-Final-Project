@@ -91,6 +91,22 @@
                 [formControlName]="'password'"
               />
             </div>
+            <div (click)="signInGoogle()" class="google p-1 rounded mb-2">
+              <img
+                style="width: 30px"
+                src="../../../../../assets/google.png"
+                alt="google"
+              />
+              <span class="ms-4">{{ "login.withGoogle" | transloco }}</span>
+            </div>
+            <div (click)="signInGithub()" class="github p-1 rounded mb-3">
+              <img
+                style="width: 30px; background-color: white"
+                src="../../../../../assets/github.png"
+                alt="github"
+              />
+              <span class="ms-4">{{ "login.withGithub" | transloco }}</span>
+            </div>
             <button
               [disabled]="loginForm.invalid"
               type="submit"
