@@ -22,6 +22,7 @@ import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
 import { CartsService } from "src/app/modules/cart/services/carts.service";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { ProductService } from "src/app/shared/services/product.service";
+import { _admin } from "../../../../environments/environment";
 
 @Component({
   selector: "app-detail",
@@ -60,6 +61,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   isLoading: boolean; //loading spinner conditioner
   isDeleted: boolean; //delete message conditioner
   addedToCart: boolean; //if addtoCart is complete success
+  _admin: string = _admin; //get admin from environment
 
   constructor(
     private route: ActivatedRoute,

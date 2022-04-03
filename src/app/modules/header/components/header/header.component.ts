@@ -12,6 +12,7 @@ import { CartsService } from "src/app/modules/cart/services/carts.service";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { ProductService } from "src/app/shared/services/product.service";
 import { TranslocoService } from "@ngneat/transloco";
+import { _admin } from "../../../../../environments/environment";
 
 @Component({
   selector: "app-header",
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userLoggedIn: UserLoggedIn; //user that loggedIn
   allCarts: Carts[] = []; //user cart items
   sendShopForToggle: boolean; //categories clicked or not variable
-  filterWord: string | number;
+  filterWord: string | number; //filter word from search bar
+  _admin = _admin;
 
   //fontawesome variables
   faCartCheck = faShoppingBag;

@@ -9,7 +9,10 @@
     "invalid-email-format": "Geçersiz email formatı",
     "e-mail-sent": "Şifre sıfırlama e-postası gönderildi.",
     "send-button": "Gönder",
-    "forgot": "Şifrenizi mi unuttunuz?"
+    "forgot": "Şifrenizi mi unuttunuz?",
+    "verify": "Lütfen önce üyeliğiniz aktif ediniz.",
+    "email-not-found": "E-Posta adresi kayıtlı değil",
+    "password-wrong": "Yanlış Şifre"
   },
   "register": {
     "title": "Kayıt",
@@ -19,7 +22,10 @@
     "register-btn": "Kayıt",
     "login": "Giriş",
     "invalid-email-format": "Geçersiz email formatı",
-    "password-type-info": "Şifreniz en az bir büyük harf,bir küçük harf ve 6-30 karakter içermelidir."
+    "password-type-info": "Şifreniz en az bir büyük harf,bir küçük harf ve 6-30 karakter içermelidir.",
+    "verify-message": "E-posta adresi aktivasyon mail'i gönderildi. Lütfen gelen kutunuzu kontol ediniz.",
+    "password-not-match": "Şifreleriniz eşleşmiyor!",
+    "already-exist": "This email address already exist"
   },
   "cart": {
     "shopping-bag": "SEPETİM",

@@ -11,7 +11,7 @@
         <div>
           <h2 class="mt-3">{{ productById.title }}</h2>
         </div>
-        <div *ngIf="userLoggedIn.email == 'admin@admin.com'">
+        <div *ngIf="userLoggedIn.email == _admin">
           <!-- ERROR HANDLING -->
           <span *ngIf="isDeleted" class="text-success float-left me-1"
             >{{ "detail.deleted" | transloco }}

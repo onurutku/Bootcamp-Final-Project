@@ -48,7 +48,7 @@
               >{{ "header.contact" | transloco }}</a
             >
           </li>
-          <li *ngIf="userLoggedIn.email === 'admin@admin.com'" class="nav-item">
+          <li *ngIf="userLoggedIn.email === _admin" class="nav-item">
             <a
               [routerLink]="['/admin/shop']"
               routerLinkActive="active"

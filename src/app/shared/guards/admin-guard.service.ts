@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
   RouterStateSnapshot,
   UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserLoggedIn } from '../models/userLoggedIn.model';
-import { AuthService } from '../services/auth.service';
-
+} from "@angular/router";
+import { Observable } from "rxjs";
+import { UserLoggedIn } from "../models/userLoggedIn.model";
+import { AuthService } from "../services/auth.service";
+import { _admin } from "../../../environments/environment";
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AdminGuardService implements CanActivate {
   userLoggedIn: UserLoggedIn;
@@ -27,10 +27,10 @@ export class AdminGuardService implements CanActivate {
     this.auth.userLoggedIn.subscribe((userLoggedIn: UserLoggedIn) => {
       this.userLoggedIn = userLoggedIn;
     });
-    if (this.userLoggedIn.email == 'admin@admin.com') {
+    if (this.userLoggedIn.email == _admin) {
       return true;
     } else {
-      this.router.navigate(['/shop']);
+      this.router.navigate(["/shop"]);
       return false;
     }
   }

@@ -56,30 +56,57 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.get("email").value,
       password: this.loginForm.get("password").value,
     };
-    //login method on login service
-    this.auth.login(user).subscribe(
-      (responseData: LoginResponse) => {
+    this.auth.login(user).then((result) => {
+      //catch return user value to handle messages on UI side
+      if (result.user.emailVerified) {
         this.loggedIn = true; //to show successfull login message
         this.isLoading = false; // loading spinner closed
         this.router.navigate(["/shop"]); //route to dashboard
         this.loginForm.reset();
-      },
-      (error) => {
-        //these error list conditions has taken from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
-        switch (error.error.error.message) {
-          case "EMAIL_NOT_FOUND":
-            this.loginErrorMessage = "Email not found";
-            break;
-          case "INVALID_PASSWORD":
-            this.loginErrorMessage = "Invalid password";
-            break;
-          case "USER_DISABLED":
-            this.loginErrorMessage = "User banned!";
-            break;
-        }
-        this.isLoading = false;
+      } else {
+        this.loginErrorMessage = "Please verify your email address first";
+        this.isLoading = false; // loading spinner closed
+        this.timer2();
       }
-    );
+    });
+    //error handling
+    this.auth.errorMessage.subscribe((errorCode: string) => {
+      switch (errorCode) {
+        case "auth/user-not-found":
+          this.loginErrorMessage = "User not Found!";
+          break;
+        case "auth/wrong-password":
+          this.loginErrorMessage = "Wrong Password";
+          break;
+      }
+      this.isLoading = false; // loading spinner closed
+      this.timer2();
+    });
+    //---------------------------------__OLD LOGIN METHOD------------------------------
+    // //login method on login service
+    // this.auth.login(user).subscribe(
+    //   (responseData: LoginResponse) => {
+    //     this.loggedIn = true; //to show successfull login message
+    //     this.isLoading = false; // loading spinner closed
+    //     this.router.navigate(["/shop"]); //route to dashboard
+    //     this.loginForm.reset();
+    //   },
+    //   (error) => {
+    //     //these error list conditions has taken from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
+    //     switch (error.error.error.message) {
+    //       case "EMAIL_NOT_FOUND":
+    //         this.loginErrorMessage = "Email not found";
+    //         break;
+    //       case "INVALID_PASSWORD":
+    //         this.loginErrorMessage = "Invalid password";
+    //         break;
+    //       case "USER_DISABLED":
+    //         this.loginErrorMessage = "User banned!";
+    //         break;
+    //     }
+    //     this.isLoading = false;
+    //   }
+    // );
   }
   //route to the register page button method
   toRegisterPage(): void {
@@ -108,6 +135,11 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.isForgot = false;
       this.resetEmailSentMessage = false;
+    }, 2000);
+  }
+  timer2(): void {
+    setTimeout(() => {
+      this.loginErrorMessage = "";
     }, 2000);
   }
 }

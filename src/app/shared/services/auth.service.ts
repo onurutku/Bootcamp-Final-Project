@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { RegisterResponse } from "../models/register-response.model";
 import { FormInput } from "../models/formInputs.model";
 import { LoginResponse } from "../models/login-response.model";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
 import { UserLoggedIn } from "../models/userLoggedIn.model";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
@@ -14,6 +14,7 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 export class AuthService {
   userLoggedIn = new BehaviorSubject<UserLoggedIn>(null);
   timeForTimer: number = 3600 * 1000;
+  errorMessage = new Subject<string>();
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -21,48 +22,83 @@ export class AuthService {
   ) {}
 
   //firebase endpoint signUp method returns to register component.ts
-  register(newUser: FormInput): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
-      {
-        email: newUser.email,
-        password: newUser.password,
-        returnSecureToken: true,
-      }
+  register(newUser: FormInput) {
+    //--------------------OLD REGISTER METHOD------------------------------------
+    // return this.http.post<RegisterResponse>(
+    //   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
+    //   {
+    //     email: newUser.email,
+    //     password: newUser.password,
+    //     returnSecureToken: true,
+    //   }
+    // );
+    //--------------------OLD REGISTER METHOD------------------------------------
+    return this.angularfireAuth.createUserWithEmailAndPassword(
+      newUser.email,
+      newUser.password
     );
   }
-  login(user: FormInput): Observable<LoginResponse> {
-    //login method it takes form user information
-    return this.http
-      .post<LoginResponse>( //post method to firebase auth
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
-        {
-          //firebase authentication post methods body
-          email: user.email,
-          password: user.password,
-          returnSecureToken: true,
-        }
-      )
-      .pipe(
-        // rxJS pipe operator for can use tap function
-        tap((response: LoginResponse) => {
-          // tap function that we use for sight-effect to an observiable. Because we used subscribe in a component.ts method
-          const expirationDate = new Date( //this time calculation for auto logout
-            new Date().getTime() + +response.expiresIn * 1000
-          );
-          //create an object to send behavior subject and localstorage.We'll use this observable in interceptors to create a condition to write data on database
-          const userLoggedIn: UserLoggedIn = {
-            email: response.email,
-            localId: response.localId,
-            idToken: response.idToken,
-            expirationDate,
-          };
-          //next data with subject and create a user in sessionStorage
-          this.userLoggedIn.next(userLoggedIn);
-          sessionStorage.setItem("user", JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
-          this.autoLogout(this.timeForTimer);
-        })
+  //login method it takes form user information
+  async login(user: FormInput) {
+    try {
+      //try login ad send infor to interceptor and save user information to storage
+      const result = await this.angularfireAuth.signInWithEmailAndPassword(
+        user.email,
+        user.password
       );
+      const token = await result.user.getIdToken(true); //to get token from API firebase method
+      const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+
+      const userLoggedIn: UserLoggedIn = {
+        email: result.user.email,
+        localId: result.user.uid,
+        idToken: token,
+        expirationDate: expirationDate,
+      };
+      if (result.user.emailVerified) {
+        this.userLoggedIn.next(userLoggedIn);
+        sessionStorage.setItem("user", JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
+        this.autoLogout(this.timeForTimer);
+      }
+      return result;
+    } catch (error) {
+      //catch error and send it component.ts file for handle errors
+      this.errorMessage.next(error.code);
+    }
+
+    //---------------------------------OLD LOGIN METHOD--------------------------------
+    //login method it takes form user information
+    // return this.http
+    //   .post<LoginResponse>( //post method to firebase auth
+    //     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
+    //     {
+    //       //firebase authentication post methods body
+    //       email: user.email,
+    //       password: user.password,
+    //       returnSecureToken: true,
+    //     }
+    //   )
+    //   .pipe(
+    //     // rxJS pipe operator for can use tap function
+    //     tap((response: LoginResponse) => {
+    //       // tap function that we use for sight-effect to an observiable. Because we used subscribe in a component.ts method
+    //       const expirationDate = new Date( //this time calculation for auto logout
+    //         new Date().getTime() + +response.expiresIn * 1000
+    //       );
+    //       //create an object to send behavior subject and localstorage.We'll use this observable in interceptors to create a condition to write data on database
+    //       const userLoggedIn: UserLoggedIn = {
+    //         email: response.email,
+    //         localId: response.localId,
+    //         idToken: response.idToken,
+    //         expirationDate,
+    //       };
+    //       //next data with subject and create a user in sessionStorage
+    //       this.userLoggedIn.next(userLoggedIn);
+    //       sessionStorage.setItem("user", JSON.stringify(userLoggedIn)); //i'll use this information for auto login method.
+    //       this.autoLogout(this.timeForTimer);
+    //     })
+    //   );
+    //---------------------------------OLD LOGIN METHOD--------------------------------
   }
   //auto login on page refresh
   autoLogin() {

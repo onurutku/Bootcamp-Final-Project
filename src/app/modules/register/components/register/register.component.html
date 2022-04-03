@@ -27,6 +27,10 @@
                   {{ registerError }}
                   <fa-icon class="icon" [icon]="faShield"></fa-icon>
                 </p>
+                <p *ngIf="verifyMailSent" class="help-block text-success">
+                  {{ "register.verify-message" | transloco }}
+                  <fa-icon class="icon" [icon]="faShield"></fa-icon>
+                </p>
               </div>
             </div>
           </div>
@@ -89,7 +93,7 @@
             *ngIf="passwordWarning && registerForm.get('repassword').touched"
             class="help-block text-danger"
           >
-            {{ passwordWarning }}
+            {{ "register.password-not-match" | transloco }}
           </p>
           <button
             [disabled]="registerForm.invalid"

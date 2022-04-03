@@ -9,7 +9,10 @@
     "invalid-email-format": "Invalid e-mail address format",
     "e-mail-sent": "Password reset e-mail has been sent. Please check your mailbox",
     "send-button": "Send",
-    "forgot": "Forgot your password?"
+    "forgot": "Forgot your password?",
+    "verify": "Verify your email address first",
+    "email-not-found": "Email not found",
+    "password-wrong": "Wrong Password"
   },
   "register": {
     "title": "Register",
@@ -19,7 +22,9 @@
     "register-btn": "Register",
     "login": "Login",
     "invalid-email-format": "Invalid Email Address Format",
-    "password-type-info": "Password should contains one uppercase,one lowercase character and it should be '6-30' character long"
+    "password-type-info": "Password should contains one uppercase,one lowercase character and it should be '6-30' character long",
+    "verify-message": "Verification e-mail has been sent. Please verify your e-mail address first",
+    "password-not-match": "Password doesn't match"
   },
   "cart": {
     "shopping-bag": "MY SHOPPING BAG",

@@ -31,8 +31,28 @@
                   {{ "login.success-message" | transloco }}
                   <fa-icon class="icon" [icon]="faCheck"></fa-icon>
                 </p>
-                <p *ngIf="loginErrorMessage" class="help-block text-danger">
-                  {{ loginErrorMessage }}
+                <p
+                  *ngIf="
+                    loginErrorMessage ==
+                    'Please verify your email address first'
+                  "
+                  class="help-block text-danger"
+                >
+                  {{ "login.verify" | transloco }}
+                  <fa-icon class="icon" [icon]="faShield"></fa-icon>
+                </p>
+                <p
+                  *ngIf="loginErrorMessage == 'User not Found!'"
+                  class="help-block text-danger"
+                >
+                  {{ "login.email-not-found" | transloco }}
+                  <fa-icon class="icon" [icon]="faShield"></fa-icon>
+                </p>
+                <p
+                  *ngIf="loginErrorMessage == 'Wrong Password'"
+                  class="help-block text-danger"
+                >
+                  {{ "login.password-wrong" | transloco }}
                   <fa-icon class="icon" [icon]="faShield"></fa-icon>
                 </p>
               </div>

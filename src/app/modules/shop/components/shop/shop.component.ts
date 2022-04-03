@@ -19,6 +19,7 @@ import { Products } from "src/app/shared/models/products.model";
 import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { ProductService } from "src/app/shared/services/product.service";
+import { _admin } from "../../../../../environments/environment";
 
 @Component({
   selector: "app-shop",
@@ -58,6 +59,7 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   query: string; //queryparameter from page;
   layer: Products[] = []; //layer product holder for pagination
   userLoggedIn: UserLoggedIn; //user logged in
+  _admin = _admin;
 
   listOrCard: boolean = true;
 

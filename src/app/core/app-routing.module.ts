@@ -34,20 +34,6 @@ const routes: Routes = [
     loadChildren: () =>
       import("../modules/contact/contact.module").then((m) => m.ContactModule),
   },
-  // {
-  //   path: "new",
-  //   loadChildren: () =>
-  //     import("../modules/admin/components/new/new.module").then(
-  //       (m) => m.NewModule
-  //     ),
-  // },
-  // {
-  //   path: "edit/:id",
-  //   loadChildren: () =>
-  //     import("../modules/admin/components/new/new.module").then(
-  //       (m) => m.NewModule
-  //     ),
-  // },
   {
     path: "detail/:id",
     loadChildren: () =>

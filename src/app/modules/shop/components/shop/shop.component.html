@@ -4,9 +4,7 @@
   >
     <button
       #all
-      [routerLink]="
-        userLoggedIn.email == 'admin@admin.com' ? ['/admin/shop'] : ['/shop']
-      "
+      [routerLink]="userLoggedIn.email == _admin ? ['/admin/shop'] : ['/shop']"
       class="all focus"
     >
       All
@@ -18,7 +16,7 @@
         [ngClass]="buttonValue == buton.value ? 'focus' : 'all'"
         #buton
         [routerLink]="
-          userLoggedIn.email == 'admin@admin.com' ? ['/admin/shop'] : ['/shop']
+          userLoggedIn.email == _admin ? ['/admin/shop'] : ['/shop']
         "
         [queryParams]="{ search: buton.value }"
         value="{{ button }}"
@@ -48,7 +46,7 @@
     >
       <div
         [routerLink]="
-          userLoggedIn.email == 'admin@admin.com'
+          userLoggedIn.email == _admin
             ? ['/admin/detail', product.id]
             : ['/detail', product.id]
         "
@@ -116,15 +114,13 @@
           <th scope="col">Description</th>
           <th scope="col">Size</th>
           <th scope="col">Price</th>
-          <th *ngIf="userLoggedIn.email == 'admin@admin.com'" scope="col">
-            Action
-          </th>
+          <th *ngIf="userLoggedIn.email == _admin" scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr
           [routerLink]="
-            userLoggedIn.email == 'admin@admin.com'
+            userLoggedIn.email == _admin
               ? ['/admin/detail', product.id]
               : ['/detail', product.id]
           "
@@ -145,13 +141,13 @@
           <td class="table-buttons">
             <!-- <button class="btn btn-sm">{{ "shop.add" | transloco }}</button> -->
             <fa-icon
-              *ngIf="userLoggedIn.email == 'admin@admin.com'"
+              *ngIf="userLoggedIn.email == _admin"
               [routerLink]="['/edit', product.id]"
               class="edit-icon"
               [icon]="faEdit"
             ></fa-icon>
             <fa-icon
-              *ngIf="userLoggedIn.email == 'admin@admin.com'"
+              *ngIf="userLoggedIn.email == _admin"
               (click)="onDelete(product.id)"
               class="del-icon"
               [icon]="faTrash"

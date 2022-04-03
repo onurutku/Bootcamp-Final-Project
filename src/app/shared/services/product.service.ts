@@ -42,7 +42,7 @@ export class ProductService {
         //for another observable
         finalize(() => {
           //create a new object to send realtime database form info and image URL
-          this.fileRef.getDownloadURL().subscribe((imageUrl) => {
+          this.fileRef.getDownloadURL().subscribe((imageUrl: string) => {
             //get image url from firebase storage
             const newProductInfo: ProductInfo = {
               title: productInfo.title,
