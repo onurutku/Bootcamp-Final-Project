@@ -26,6 +26,7 @@ export class NewComponent implements OnInit, OnDestroy {
   isEditMode: boolean = false;
   productId: string;
   canILeave: boolean = false; //a variable for check is it safe leave from page or not
+  showPopUp: boolean = false;
 
   isSavedSubscription: Subscription; //subscriptions
 

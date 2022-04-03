@@ -103,12 +103,13 @@ export class AuthService {
     //---------------------------------OLD LOGIN METHOD--------------------------------
   }
   //continue with google
-  async loginWithGoogle() {
+  async loginWithGoogle(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider(); //create a provider
     const credential = await this.angularfireAuth.signInWithPopup(provider); //open a popup for google provider
     const token = await credential.user.getIdToken(true); //to get token from API firebase method
     const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
     const userLoggedIn: UserLoggedIn = {
+      //create a object ot save session storage and send to interceptor
       email: credential.user.email,
       localId: credential.user.uid,
       idToken: token,
@@ -120,12 +121,13 @@ export class AuthService {
     this.autoLogout(this.timeForTimer);
   }
   //continue with github;
-  async loginWithGithub() {
+  async loginWithGithub(): Promise<any> {
     const provider = new firebase.auth.GithubAuthProvider(); //create a github provider
     const credential = await this.angularfireAuth.signInWithPopup(provider); //open a popup for github provider
     const token = await credential.user.getIdToken(true); //to get token from API firebase method
     const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
     const userLoggedIn: UserLoggedIn = {
+      //create a object ot save session storage and send to interceptor
       email: credential.user.email,
       localId: credential.user.uid,
       idToken: token,
