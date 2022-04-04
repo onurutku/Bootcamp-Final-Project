@@ -142,7 +142,7 @@
             <!-- <button class="btn btn-sm">{{ "shop.add" | transloco }}</button> -->
             <fa-icon
               *ngIf="userLoggedIn.email == _admin"
-              [routerLink]="['/edit', product.id]"
+              [routerLink]="['/admin/edit', product.id]"
               class="edit-icon"
               [icon]="faEdit"
             ></fa-icon>
