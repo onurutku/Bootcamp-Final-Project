@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { TranslocoService } from "@ngneat/transloco";
 import { ProductService } from "../../services/product.service";
 
 @Component({
@@ -7,8 +9,12 @@ import { ProductService } from "../../services/product.service";
   styleUrls: ["./confirm.component.scss"],
 })
 export class ConfirmComponent implements OnInit {
-  message = "Do you really want to leave from page without save changes?";
-  constructor(private product: ProductService) {}
+  message = this.translate.translateObject("confirm.confirmComponent");
+  faWarning = faExclamation;
+  constructor(
+    private product: ProductService,
+    private translate: TranslocoService
+  ) {}
 
   ngOnInit(): void {}
   modalSubmit() {

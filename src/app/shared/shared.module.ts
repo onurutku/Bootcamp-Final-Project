@@ -4,6 +4,8 @@ import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-sp
 import { DropdownDirective } from "./directives/dropdown.directive";
 import { SearchPipe } from "./pipes/search.pipe";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
+import { TranslocoModule } from "@ngneat/transloco";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -12,7 +14,7 @@ import { ConfirmComponent } from "./components/confirm/confirm.component";
     SearchPipe,
     ConfirmComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoModule, FontAwesomeModule],
   exports: [
     LoadingSpinnerComponent,
     DropdownDirective,

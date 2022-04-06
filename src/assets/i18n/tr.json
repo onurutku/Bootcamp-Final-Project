@@ -147,6 +147,12 @@
     "reverse": "Değişiklikleri Geri Alamayacaksınız!",
     "confirmButtonText": "Evet, Gönder!",
     "deleteConfirmButtonText": "Evet,Silinsin!",
-    "fileDeleted": "Ürün Silindi"
+    "fileDeleted": "Ürün Silindi",
+    "commentAdded": "Yorum Eklendi"
+  },
+  "confirm": {
+    "confirmComponent": "Değişiklikleri kaydetmeden sayfadan ayrılmak istediğinize emin misiniz?",
+    "confirmButton": "Evet,Ayrıl",
+    "cancelButton": "Kal"
   }
 }

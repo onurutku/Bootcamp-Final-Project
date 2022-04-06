@@ -188,6 +188,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     };
     //call the post method on product service
     this.product.postCommentWithId(this.productId, comment).subscribe(() => {
+      this.addComment();
       this.commentForm.reset();
       this.product.commentCame.next(true); //subject next for trigger reGet product data to page without refresh the page
     });
@@ -252,6 +253,15 @@ export class DetailComponent implements OnInit, OnDestroy {
         this.isCommentSavedSuccessfully = false;
       }
     );
+  }
+  addComment() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.commentAdded"),
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
   //delete sweetalert
   swalFireDelete() {

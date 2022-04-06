@@ -146,6 +146,12 @@
     "reverse": "You won't be able to revert this!",
     "confirmButtonText": "Yes, Send it!",
     "deleteConfirmButtonText": "Yes, Delete it!",
-    "fileDeleted": "Product has been deleted"
+    "fileDeleted": "Product has been deleted",
+    "commentAdded": "Comment Added"
+  },
+  "confirm": {
+    "confirmComponent": "Do you really want to leave from page without save changes?",
+    "confirmButton": "Yes,Leave",
+    "cancelButton": "Stay"
   }
 }
