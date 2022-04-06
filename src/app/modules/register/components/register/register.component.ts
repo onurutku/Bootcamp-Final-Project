@@ -19,6 +19,7 @@ import { TranslocoService } from "@ngneat/transloco";
 import { FormInput } from "src/app/shared/models/formInputs.model";
 import { RegisterResponse } from "src/app/shared/models/register-response.model";
 import { AuthService } from "src/app/shared/services/auth.service";
+import Swal from "sweetalert2";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -89,6 +90,7 @@ export class RegisterComponent implements OnInit {
           this.registerForm.reset(); //reset the form inputs
           this.verifyMailSent = true;
         });
+        this.swalFire();
       },
       //error messages from firebase API
       (error) => {
@@ -142,12 +144,23 @@ export class RegisterComponent implements OnInit {
   }
   signInGoogle() {
     this.auth.loginWithGoogle().then(() => {
+      this.swalFire();
       this.router.navigate(["/shop"]); //route to dashboard
     });
   }
   signInGithub() {
     this.auth.loginWithGithub().then(() => {
+      this.swalFire();
       this.router.navigate(["/shop"]); //route to dashboard
+    });
+  }
+  swalFire() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.register"),
+      showConfirmButton: false,
+      timer: 3000,
     });
   }
 }

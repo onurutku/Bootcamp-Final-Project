@@ -7,6 +7,8 @@ import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { OrdersService } from "src/app/modules/admin/components/orders/services/orders.service";
 import { CartsService } from "../../services/carts.service";
+import Swal from "sweetalert2";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: "app-cart",
@@ -36,7 +38,8 @@ export class CartComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private carts: CartsService,
     private orders: OrdersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -143,6 +146,9 @@ export class CartComponent implements OnInit, OnDestroy {
       });
       this.orders.createOrder(orders, this.userLoggedIn.localId).subscribe(
         (data: any) => {
+          if (orders) {
+            this.swalFire();
+          }
           this.checkOut = true; //order complete
           this.clearCart();
         },
@@ -156,6 +162,15 @@ export class CartComponent implements OnInit, OnDestroy {
   clearCart() {
     this.carts.clearCart(this.userLoggedIn.localId).subscribe(() => {
       this.carts.allCartRemoved.next(true);
+    });
+  }
+  swalFire() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.checkout"),
+      showConfirmButton: false,
+      timer: 2000,
     });
   }
 }

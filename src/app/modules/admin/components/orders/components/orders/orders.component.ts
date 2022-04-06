@@ -4,7 +4,8 @@ import { Subscription } from "rxjs";
 import { Order } from "src/app/shared/models/order.model";
 import { CartsService } from "src/app/modules/cart/services/carts.service";
 import { OrdersService } from "src/app/modules/admin/components/orders/services/orders.service";
-
+import Swal from "sweetalert2";
+import { TranslocoService } from "@ngneat/transloco";
 @Component({
   selector: "app-orders",
   templateUrl: "./orders.component.html",
@@ -22,7 +23,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
   constructor(
     private orders: OrdersService,
     private route: ActivatedRoute,
-    private carts: CartsService
+    private carts: CartsService,
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -88,13 +90,34 @@ export class OrdersComponent implements OnInit, OnDestroy {
       orderId: orderId,
       orderIndex: orderIndex,
     };
-    this.orders.shipOrder(userId, orderId, orderIndex).subscribe(
-      () => {
-        this.orders.orderShipped.next(thisOrderWillDelete);
-      },
-      (error) => {
-        this.orders.orderShipped.next(null);
+    //sweet alert confirm box! method will wait its promise to call
+    Swal.fire({
+      title: this.translate.translateObject("sweetAlert.shipSure"),
+      text: this.translate.translateObject("sweetAlert.reverse"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: this.translate.translateObject(
+        "sweetAlert.confirmButtonText"
+      ),
+    }).then((result) => {
+      //promise result runs and orders service method calls
+      if (result.isConfirmed) {
+        this.orders.shipOrder(userId, orderId, orderIndex).subscribe(
+          () => {
+            this.orders.orderShipped.next(thisOrderWillDelete);
+          },
+          (error) => {
+            this.orders.orderShipped.next(null);
+          }
+        );
+        Swal.fire(
+          this.translate.translateObject("sweetAlert.shipped"),
+          "",
+          "success"
+        );
       }
-    );
+    });
   }
 }

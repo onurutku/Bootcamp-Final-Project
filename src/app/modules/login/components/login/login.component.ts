@@ -13,6 +13,7 @@ import { TranslocoService } from "@ngneat/transloco";
 import { FormInput } from "src/app/shared/models/formInputs.model";
 import { LoginResponse } from "src/app/shared/models/login-response.model";
 import { AuthService } from "src/app/shared/services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-login",
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
         this.isLoading = false; // loading spinner closed
         this.router.navigate(["/shop"]); //route to dashboard
         this.loginForm.reset();
+        this.swalFire();
       } else {
         this.loginErrorMessage = "Please verify your email address first";
         this.isLoading = false; // loading spinner closed
@@ -144,14 +146,26 @@ export class LoginComponent implements OnInit {
   }
   signInGoogle() {
     this.auth.loginWithGoogle().then(() => {
+      this.swalFire();
       this.loggedIn = true; //to show successfull login message
       this.router.navigate(["/shop"]); //route to dashboard
     });
   }
   signInGithub() {
+    this.swalFire();
     this.auth.loginWithGithub().then(() => {
       this.loggedIn = true; //to show successfull login message
       this.router.navigate(["/shop"]); //route to dashboard
+    });
+  }
+  //sweetalert pop-up
+  swalFire() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.login"),
+      showConfirmButton: false,
+      timer: 3000,
     });
   }
 }

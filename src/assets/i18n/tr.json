@@ -134,5 +134,19 @@
     "new-product": "Yeni Ürün Ekle",
     "product-list": "Ürünler",
     "orders": "Siparişler"
+  },
+  "sweetAlert": {
+    "login": "Giriş Başarılı",
+    "saved": "Kaydedildi",
+    "register": "Kayıt Tamamlandı",
+    "delete": "Silindi",
+    "addToCart": "Ürünler Sepete Eklendi",
+    "checkout": "Sipariş Oluşturuldu",
+    "shipped": "Kargolandı",
+    "shipSure": "Emin Misiniz?",
+    "reverse": "Değişiklikleri Geri Alamayacaksınız!",
+    "confirmButtonText": "Evet, Gönder!",
+    "deleteConfirmButtonText": "Evet,Silinsin!",
+    "fileDeleted": "Ürün Silindi"
   }
 }

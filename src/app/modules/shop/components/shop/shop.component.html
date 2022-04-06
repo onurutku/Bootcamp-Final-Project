@@ -118,15 +118,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          [routerLink]="
-            userLoggedIn.email == _admin
-              ? ['/admin/detail', product.id]
-              : ['/detail', product.id]
-          "
-          *ngFor="let product of products | search: categoryValue"
-        >
-          <th scope="row">
+        <tr *ngFor="let product of products | search: categoryValue">
+          <th
+            [routerLink]="
+              userLoggedIn.email == _admin
+                ? ['/admin/detail', product.id]
+                : ['/detail', product.id]
+            "
+            scope="row"
+          >
             <img
               style="width: 70px; height: auto"
               class="list-image"
@@ -134,8 +134,24 @@
               alt="img"
             />
           </th>
-          <td>{{ product.title }}</td>
-          <td>{{ product.description | slice: 0:100 }}</td>
+          <td
+            [routerLink]="
+              userLoggedIn.email == _admin
+                ? ['/admin/detail', product.id]
+                : ['/detail', product.id]
+            "
+          >
+            {{ product.title }}
+          </td>
+          <td
+            [routerLink]="
+              userLoggedIn.email == _admin
+                ? ['/admin/detail', product.id]
+                : ['/detail', product.id]
+            "
+          >
+            {{ product.description | slice: 0:100 }}
+          </td>
           <td>S-XXL</td>
           <td>{{ product.price }}$</td>
           <td class="table-buttons">

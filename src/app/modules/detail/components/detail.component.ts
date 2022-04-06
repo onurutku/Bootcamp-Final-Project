@@ -23,6 +23,8 @@ import { CartsService } from "src/app/modules/cart/services/carts.service";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { ProductService } from "src/app/shared/services/product.service";
 import { _admin } from "../../../../environments/environment";
+import Swal from "sweetalert2";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: "app-detail",
@@ -68,7 +70,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private product: ProductService,
     private router: Router,
-    private cart: CartsService
+    private cart: CartsService,
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -163,10 +166,12 @@ export class DetailComponent implements OnInit, OnDestroy {
         () => {
           this.cart.itemAdded.next(true);
           this.addedToCart = true;
-          setTimeout(() => {
-            //route to the cart page
-            this.router.navigate(["/cart", this.userLoggedIn.localId]);
-          }, 1500);
+          this.swalFireAddToCart();
+          this.router.navigate(["/cart", this.userLoggedIn.localId]);
+          // setTimeout(() => {
+          //   //route to the cart page
+
+          // }, 1500);
         },
         (error) => {
           this.addedToCart = false;
@@ -189,20 +194,37 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
   //delete production method
   onDelete(): void {
-    this.isLoading = true;
-    this.product.deleteProduct(this.productId).subscribe(
-      (response: null) => {
-        this.isDeleted = true;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.router.navigate(["/shop"]); //route the shop
-        }, 1500);
-      },
-      //error handling for delete method
-      (error) => {
-        this.isDeleted = false;
+    Swal.fire({
+      title: this.translate.translateObject("sweetAlert.shipSure"),
+      text: this.translate.translateObject("sweetAlert.reverse"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: this.translate.translateObject(
+        "sweetAlert.deleteConfirmButtonText"
+      ),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.isLoading = true;
+        this.product.deleteProduct(this.productId).subscribe(
+          (response: null) => {
+            this.isDeleted = true;
+            this.isLoading = false;
+            this.router.navigate(["/shop"]); //route the shop
+          },
+          //error handling for delete method
+          (error) => {
+            this.isDeleted = false;
+          }
+        );
+        Swal.fire(
+          this.translate.translateObject("sweetAlert.delete"),
+          this.translate.translateObject("sweetAlert.fileDeleted"),
+          "success"
+        );
       }
-    );
+    });
   }
   //this method sends a boolean to new component to set it for edit mode!
 
@@ -230,5 +252,25 @@ export class DetailComponent implements OnInit, OnDestroy {
         this.isCommentSavedSuccessfully = false;
       }
     );
+  }
+  //delete sweetalert
+  swalFireDelete() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.delete"),
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  }
+  //add to cart sweet alert
+  swalFireAddToCart() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.addToCart"),
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
 }

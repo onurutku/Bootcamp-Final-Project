@@ -133,5 +133,19 @@
     "new-product": "New Product",
     "product-list": "Product List",
     "orders": "Orders"
+  },
+  "sweetAlert": {
+    "login": "Logged In",
+    "saved": "Saved",
+    "register": "Signed Up",
+    "delete": "Deleted",
+    "addToCart": "Added to Shopping Cart",
+    "checkout": "Order Created",
+    "shipped": "Order Shipped",
+    "shipSure": "Are you sure?",
+    "reverse": "You won't be able to revert this!",
+    "confirmButtonText": "Yes, Send it!",
+    "deleteConfirmButtonText": "Yes, Delete it!",
+    "fileDeleted": "Product has been deleted"
   }
 }

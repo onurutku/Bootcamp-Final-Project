@@ -20,6 +20,8 @@ import { UserLoggedIn } from "src/app/shared/models/userLoggedIn.model";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { ProductService } from "src/app/shared/services/product.service";
 import { _admin } from "../../../../../environments/environment";
+import Swal from "sweetalert2";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: "app-shop",
@@ -67,7 +69,8 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
     private route: ActivatedRoute,
     private product: ProductService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -250,18 +253,33 @@ export class ShopComponent implements OnInit, OnDestroy, AfterViewInit {
   listCardToggle(): void {
     this.listOrCard = !this.listOrCard;
   }
-  //delete production method
+  //delete production method with sweetalert
   onDelete(productId: string): void {
-    // this.isLoading = true;
-    this.product.deleteProduct(productId).subscribe(
-      (response: null) => {
-        // this.isLoading = false;
-        this.product.isDeleted.next(true);
-      },
-      //error handling for delete method
-      (error) => {
-        // this.isDeleted = false;
+    Swal.fire({
+      title: this.translate.translateObject("sweetAlert.shipSure"),
+      text: this.translate.translateObject("sweetAlert.reverse"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: this.translate.translateObject(
+        "sweetAlert.deleteConfirmButtonText"
+      ),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.product.deleteProduct(productId).subscribe(
+          (response: null) => {
+            this.product.isDeleted.next(true);
+          },
+          //error handling for delete method
+          (error) => {}
+        );
+        Swal.fire(
+          this.translate.translateObject("sweetAlert.delete"),
+          this.translate.translateObject("sweetAlert.fileDeleted"),
+          "success"
+        );
       }
-    );
+    });
   }
 }

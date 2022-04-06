@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { faCheck, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { TranslocoService } from "@ngneat/transloco";
 import { Subscription } from "rxjs";
 import { ProductInfo } from "src/app/shared/models/productInfo.model";
 import { Products } from "src/app/shared/models/products.model";
 import { ProductService } from "src/app/shared/services/product.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-new",
@@ -33,7 +35,8 @@ export class NewComponent implements OnInit, OnDestroy {
   constructor(
     private product: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +65,7 @@ export class NewComponent implements OnInit, OnDestroy {
           this.router.navigate(["/shop"]); //route the shop
           this.imageSrc = "../../../assets/dummy.jpg"; //a dummy image for empty situtations
         }
+        this.swalFire(); //sweetAlert for information
       }
     );
     //set new Component to for edit Mode!
@@ -141,5 +145,15 @@ export class NewComponent implements OnInit, OnDestroy {
         )
         .subscribe(() => {}); //send storage the selected image and send other values to realtime database
     }
+  }
+  //sweetalert method
+  swalFire() {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: this.translate.translateObject("sweetAlert.saved"),
+      showConfirmButton: false,
+      timer: 3000,
+    });
   }
 }
