@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private translate: TranslocoService
+    public translate: TranslocoService
   ) {}
 
   ngOnInit(): void {
