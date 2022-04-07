@@ -2,6 +2,9 @@
 
 ("https://bootcamp-final-out.netlify.app")
 
+Admin email: orionbootcamp@gmail.com
+Admin pass: Orion123
+
 # You-tube Project Explanation Video Link
 
 ("https://youtu.be/W5ubadZA9RA")
