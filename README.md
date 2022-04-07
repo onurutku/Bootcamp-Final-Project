@@ -1,11 +1,8 @@
-# Week4 Homework Project Live Link
+# Angular Bootcamp Final Project
 
 ("https://bootcamp-final-out.netlify.app")
 
-Admin email: orionbootcamp@gmail.com
-Admin pass: Orion123
-
-# You-tube Project Explanation Video Link
+# YouTube Project Explanation Video Link
 
 ("https://youtu.be/W5ubadZA9RA")
 
@@ -38,6 +35,8 @@ and also i used Google-Firebase backend-services for this project
 <strong>Firebase Auth Module</strong>
 <strong>Firebase Realtime Database Module</strong>
 <strong>Firebase Storage (store files)</strong>
+<strong>Firebase Google Authentication</strong>
+<strong>Firebase Github Authentication</strong>
 
 In this project as you can watch on youtube video, there is a user interface for a customer and a admin interface. Customers can buy see details of products and add products to their shoppin carts and checkout. Admin iterface can upload/delete products on website and check orders from customers checkouts to ship.
 
@@ -46,38 +45,77 @@ In this project as you can watch on youtube video, there is a user interface for
 <strong>Bootstrap</strong>
 <strong>Scss</strong>
 <strong>FontAwesome</strong>
+<strong>SweetAlert2</strong>
 
 For styling i used Bootstrap,Scss and FontAwesome.During coding the project sometimes i need some special mediaqueries to make project real responsive. For example you can find that changes on login.component.scss file.
 
 ## Some SS from Project
 
 <img
-src='src/assets/register.jpg'
+src='src/assets/ss/register.jpg'
 raw=true
 alt='Subject Pronouns'
 style='margin-right: 10px; width:600px; height:auto;'
 />
 
 <img
-src='src/assets/login.jpg'
+src='src/assets/ss/login.jpg'
 raw=true
 alt='Subject Pronouns'
 style='margin-right: 10px; width:600px; height:auto;'
 />
 
 <img
-src='src/assets/shop.jpg'
+src='src/assets/ss/shop.jpg'
 raw=trueScss
+alt='Subject Pronouns'
+style='margin-right: 10px; width:600px; height:auto;'
+/>
 
 <img
-src='src/assets/cart.jpg'
+src='src/assets/ss/cart.jpg'
 raw=true
 alt='Subject Pronouns'
 style='margin-right: 10px; width:600px; height:auto;'
 />
 
 <img
-src='src/assets/detail.jpg'
+src='src/assets/ss/detail.jpg'
+raw=true
+alt='Subject Pronouns'
+style='margin-right: 10px; width:600px; height:auto;'
+/>
+
+<img
+src='src/assets/ss/canDeactivate.jpg'
+raw=true
+alt='Subject Pronouns'
+style='margin-right: 10px; width:600px; height:auto;'
+/>
+
+<img
+src='src/assets/ss/shop-list.jpg'
+raw=true
+alt='Subject Pronouns'
+style='margin-right: 10px; width:600px; height:auto;'
+/>
+
+<img
+src='src/assets/ss/sweetAlert.jpg'
+raw=true
+alt='Subject Pronouns'
+style='margin-right: 10px; width:600px; height:auto;'
+/>
+
+<img
+src='src/assets/ss/admin-orders.jpg'
+raw=true
+alt='Subject Pronouns'
+style='margin-right: 10px; width:600px; height:auto;'
+/>
+
+<img
+src='src/assets/ss/admin-new.jpg'
 raw=true
 alt='Subject Pronouns'
 style='margin-right: 10px; width:600px; height:auto;'
@@ -88,7 +126,7 @@ style='margin-right: 10px; width:600px; height:auto;'
 <hr>
 1-install Angular CLI version 13 or 14
 2-open a terminal and run
-git clone "https://github.com/164-orion-innovation-turkey-bootcamp/hafta4-odev-assignment-onurutku.git"
+git clone "https://github.com/onurutku/Bootcamp-Final-Project"
 3-run "npm install" to call node modules.
 4-run "ng s --o"
 
