@@ -11,7 +11,7 @@ Admin pass: Orion123
 
 # Importan Note:
 
-## Admin : username: admin@admin.com , password : Admin123
+## Admin : username: orionbootcamp@gmail.com , password : Orion123
 
 You can login with this username and password if you want to check my project as admin or you can register with a random e-mail address to check the project as customer.
 
