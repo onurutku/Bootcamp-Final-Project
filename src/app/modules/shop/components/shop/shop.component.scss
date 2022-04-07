@@ -50,16 +50,25 @@ img {
   display: none;
 }
 .sidebar {
-  .row {
-    margin: 0;
-    padding: 0;
-  }
+  width: 100%;
+  height: auto;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  // margin-left: 3px;
+  // .row {
+  //   margin: 0;
+  //   padding: 0;
+  // }
   h5 {
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     margin-top: 5px;
   }
   .right {
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     background-color: #ac1a2e;
     min-width: 600px;
   }
@@ -137,4 +146,15 @@ tr {
   color: red;
   font-size: 1.3rem;
   cursor: pointer;
+}
+.media-query {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 631px) {
+  .media-query {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

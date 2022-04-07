@@ -1,40 +1,49 @@
 <div class="row sidebar">
   <div
-    class="right col-sm-12 text-white d-flex justify-content-center align-items-center flex-row pb-2 pt-2"
+    class="right col-sm-12 text-white d-flex justify-content-center align-items-center pb-2 pt-2"
   >
-    <button
-      #all
-      [routerLink]="userLoggedIn.email == _admin ? ['/admin/shop'] : ['/shop']"
-      class="all focus"
-    >
-      All
-    </button>
+    <div class="media-query">
+      <div class="d-flex flex-row">
+        <button
+          #all
+          [routerLink]="
+            userLoggedIn.email == _admin ? ['/admin/shop'] : ['/shop']
+          "
+          class="all focus"
+        >
+          All
+        </button>
+        <div *ngFor="let button of categories">
+          <span>|</span>
+          <button
+            [ngClass]="buttonValue == buton.value ? 'focus' : 'all'"
+            #buton
+            [routerLink]="
+              userLoggedIn.email == _admin ? ['/admin/shop'] : ['/shop']
+            "
+            [queryParams]="{ search: buton.value }"
+            value="{{ button }}"
+            (click)="sendVal(buton.value)"
+          >
+            {{ button }}
+          </button>
+        </div>
+      </div>
 
-    <div *ngFor="let button of categories">
-      <span>|</span>
-      <button
-        [ngClass]="buttonValue == buton.value ? 'focus' : 'all'"
-        #buton
-        [routerLink]="
-          userLoggedIn.email == _admin ? ['/admin/shop'] : ['/shop']
-        "
-        [queryParams]="{ search: buton.value }"
-        value="{{ button }}"
-        (click)="sendVal(buton.value)"
-      >
-        {{ button }}
-      </button>
-    </div>
-
-    <select #opt (click)="sortBy(opt.value)" id="sort" class="ms-2">
-      <option selected disabled value="">{{ "shop.sort" | transloco }}</option>
-      <option value="HL">{{ "shop.hl" | transloco }}</option>
-      <option value="LH">{{ "shop.lh" | transloco }}</option>
-    </select>
-    <div>
-      <button (click)="listCardToggle()" class="focus ms-3">
-        {{ listOrCard ? ("shop.list" | transloco) : ("shop.card" | transloco) }}
-      </button>
+      <div>
+        <select #opt (click)="sortBy(opt.value)" id="sort" class="ms-2">
+          <option selected disabled value="">
+            {{ "shop.sort" | transloco }}
+          </option>
+          <option value="HL">{{ "shop.hl" | transloco }}</option>
+          <option value="LH">{{ "shop.lh" | transloco }}</option>
+        </select>
+        <button (click)="listCardToggle()" class="focus ms-3">
+          {{
+            listOrCard ? ("shop.list" | transloco) : ("shop.card" | transloco)
+          }}
+        </button>
+      </div>
     </div>
   </div>
 </div>
