@@ -27,7 +27,7 @@ export class AuthService {
   register(newUser: FormInput) {
     //--------------------OLD REGISTER METHOD------------------------------------
     // return this.http.post<RegisterResponse>(
-    //   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
+    //   "apikey",
     //   {
     //     email: newUser.email,
     //     password: newUser.password,
@@ -72,7 +72,7 @@ export class AuthService {
     //login method it takes form user information
     // return this.http
     //   .post<LoginResponse>( //post method to firebase auth
-    //     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1IBUpE6IQdp36Ann5eMYUqsH4WMY-Sh0",
+    //     "apikey",
     //     {
     //       //firebase authentication post methods body
     //       email: user.email,
